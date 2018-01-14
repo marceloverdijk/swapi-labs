@@ -1,6 +1,8 @@
 spring:
+  datasource:
+    name: swaphqldb
   jpa:
-    hibernate.ddl-auto: none
+    hibernate.ddl-auto: create
     show-sql: true
 logging:
   level:
