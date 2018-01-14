@@ -1,0 +1,74 @@
+buildscript {
+    ext {
+        graphqlJavaToolsVersion          = "4.3.0"
+        graphqlSpringBootStarterVersion  = "4.0.0.M1"
+        graphiqlSpringBootStarterVersion = "3.10.0"
+        querydslPluginVersion            = "1.0.9"
+        springBootVersion                = "2.0.0.BUILD-SNAPSHOT"
+    }
+    repositories {
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("gradle.plugin.com.ewerk.gradle.plugins:querydsl-plugin:${querydslPluginVersion}")
+    }
+}
+
+apply plugin: "java"
+apply plugin: "idea"
+apply plugin: "com.ewerk.gradle.plugins.querydsl"
+apply plugin: "org.springframework.boot"
+apply plugin: "io.spring.dependency-management"
+
+group = "com.github.marceloverdijk"
+version = "1.0.0-SNAPSHOT"
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir "${buildDir}/generated-sources/querydsl/java"
+        }
+    }
+}
+
+dependencies {
+    compile("com.graphql-java:graphql-java-tools:${graphqlJavaToolsVersion}")
+    compile("com.graphql-java:graphql-spring-boot-starter:${graphqlSpringBootStarterVersion}")
+    compile("com.graphql-java:graphiql-spring-boot-starter:${graphiqlSpringBootStarterVersion}")
+    compile("com.querydsl:querydsl-jpa")
+    compile("org.liquibase:liquibase-core")
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile("org.springframework.boot:spring-boot-starter-aop")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.springframework.boot:spring-boot-starter-web")
+    runtime("com.h2database:h2")
+    runtime("org.springframework.boot:spring-boot-devtools")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+}
+
+bootRun {
+    systemProperties = System.properties
+}
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+querydsl {
+    querydslSourcesDir = "${buildDir}/generated-sources/querydsl/java"
+    jpa = true
+}

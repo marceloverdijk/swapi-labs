@@ -1,0 +1,15 @@
+spring:
+  jpa:
+    hibernate.ddl-auto: none
+    show-sql: true
+logging:
+  level:
+    root: INFO
+    com.github.marceloverdijk.swaphql: DEBUG
+management:
+  endpoints:
+    jmx:
+      enabled: false
+    web:
+      enabled: true
+      expose: "*"
