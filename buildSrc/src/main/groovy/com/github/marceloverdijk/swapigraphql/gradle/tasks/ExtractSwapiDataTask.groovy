@@ -6,40 +6,41 @@ import org.gradle.api.tasks.TaskAction
 
 class ExtractSwapiDataTask extends DefaultTask {
 
-    static String UNKNOWN_PLANET_ID = "28"
-
     String group = "SWAPI"
     String description = "Downloads and extracts all the swapi.co SWAPI data."
 
     String baseUrl = "https://swapi.co/api"
-    File outputDir = project.file("src/data")
+    File outputDir = project.file("src/data/swapi")
 
     JsonSlurper jsonSlurper = new JsonSlurper()
+
+    String unknownPlanetId
 
     @TaskAction
     def extract() {
 
         println "Retrieving data..."
 
+        outputDir.deleteDir()
         outputDir.mkdirs()
 
         def people = getPagedData("people")
-        writePeople(people)
-
         def planets = getPagedData("planets")
-        planets.removeAll { parseId(it.url) == UNKNOWN_PLANET_ID }
-        writePlanets(planets)
-
         def films = getPagedData("films")
-        writeFilms(films)
-
         def species = getPagedData("species")
-        writeSpecies(species)
-
         def vehicles = getPagedData("vehicles")
-        writeVehicles(vehicles)
-
         def starships = getPagedData("starships")
+
+        // Find and remove the "unknown" planet.
+        unknownPlanetId = parseId(planets.find { ("unknown").equalsIgnoreCase(it.name) }.url)
+        planets.removeAll { parseId(it.url) == unknownPlanetId }
+        println "Removed 'unknown' planet (id=${unknownPlanetId})"
+
+        writePeople(people)
+        writePlanets(planets)
+        writeFilms(films)
+        writeSpecies(species)
+        writeVehicles(vehicles)
         writeStarships(starships)
 
         println "People: " + people.size()
@@ -56,7 +57,8 @@ class ExtractSwapiDataTask extends DefaultTask {
         new File(outputDir, "people.yml").withWriter { out ->
             people.each { person ->
                 def homeworld = person.homeworld ? parseId(person.homeworld) : null
-                if (homeworld == UNKNOWN_PLANET_ID) {
+                if (homeworld == unknownPlanetId) {
+                    // Remove reference to the "unknown" planet and instead use "null".
                     homeworld = null
                 }
                 def properties = [
