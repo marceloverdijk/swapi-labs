@@ -106,6 +106,4 @@ public class Planet extends DateTimeModel<Long> {
     public void setPopulation(final String population) {
         this.population = population;
     }
-
-
 }
