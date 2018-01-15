@@ -72,3 +72,9 @@ querydsl {
     querydslSourcesDir = "${buildDir}/generated-sources/querydsl/java"
     jpa = true
 }
+
+task downloadSwapiData(type: com.github.marceloverdijk.swaphql.gradle.tasks.DownloadSwapiDataTask) {
+}
+
+task generateDataSqlFile(type: com.github.marceloverdijk.swaphql.gradle.tasks.GenerateDataSqlFileTask) {
+}
