@@ -1,0 +1,680 @@
+- id: 15
+  name: Executor
+  model: Executor-class star dreadnought
+  starship_class: Star dreadnought
+  manufacturer: Kuat Drive Yards, Fondor Shipyards
+  cost_in_credits: 1143350000
+  length: 19000
+  crew: 279144
+  passengers: 38000
+  max_atmosphering_speed:
+  hyperdrive_rating: 2.0
+  mglt: 40
+  cargo_capacity: 250000000
+  consumables: 6 years
+  films:
+    - 2
+    - 3
+  pilots:
+- id: 5
+  name: Sentinel-class landing craft
+  model: Sentinel-class landing craft
+  starship_class: landing craft
+  manufacturer: Sienar Fleet Systems, Cyngus Spaceworks
+  cost_in_credits: 240000
+  length: 38
+  crew: 5
+  passengers: 75
+  max_atmosphering_speed: 1000
+  hyperdrive_rating: 1.0
+  mglt: 70
+  cargo_capacity: 180000
+  consumables: 1 month
+  films:
+    - 1
+  pilots:
+- id: 9
+  name: Death Star
+  model: DS-1 Orbital Battle Station
+  starship_class: Deep Space Mobile Battlestation
+  manufacturer: Imperial Department of Military Research, Sienar Fleet Systems
+  cost_in_credits: 1000000000000
+  length: 120000
+  crew: 342953
+  passengers: 843342
+  max_atmosphering_speed:
+  hyperdrive_rating: 4.0
+  mglt: 10
+  cargo_capacity: 1000000000000
+  consumables: 3 years
+  films:
+    - 1
+  pilots:
+- id: 10
+  name: Millennium Falcon
+  model: YT-1300 light freighter
+  starship_class: Light freighter
+  manufacturer: Corellian Engineering Corporation
+  cost_in_credits: 100000
+  length: 34.37
+  crew: 4
+  passengers: 6
+  max_atmosphering_speed: 1050
+  hyperdrive_rating: 0.5
+  mglt: 75
+  cargo_capacity: 100000
+  consumables: 2 months
+  films:
+    - 2
+    - 7
+    - 3
+    - 1
+  pilots:
+    - 13
+    - 14
+    - 25
+    - 31
+- id: 11
+  name: Y-wing
+  model: BTL Y-wing
+  starship_class: assault starfighter
+  manufacturer: Koensayr Manufacturing
+  cost_in_credits: 134999
+  length: 14
+  crew: 2
+  passengers: 0
+  max_atmosphering_speed: 1000km
+  hyperdrive_rating: 1.0
+  mglt: 80
+  cargo_capacity: 110
+  consumables: 1 week
+  films:
+    - 2
+    - 3
+    - 1
+  pilots:
+- id: 12
+  name: X-wing
+  model: T-65 X-wing
+  starship_class: Starfighter
+  manufacturer: Incom Corporation
+  cost_in_credits: 149999
+  length: 12.5
+  crew: 1
+  passengers: 0
+  max_atmosphering_speed: 1050
+  hyperdrive_rating: 1.0
+  mglt: 100
+  cargo_capacity: 110
+  consumables: 1 week
+  films:
+    - 2
+    - 3
+    - 1
+  pilots:
+    - 1
+    - 9
+    - 18
+    - 19
+- id: 13
+  name: TIE Advanced x1
+  model: Twin Ion Engine Advanced x1
+  starship_class: Starfighter
+  manufacturer: Sienar Fleet Systems
+  cost_in_credits:
+  length: 9.2
+  crew: 1
+  passengers: 0
+  max_atmosphering_speed: 1200
+  hyperdrive_rating: 1.0
+  mglt: 105
+  cargo_capacity: 150
+  consumables: 5 days
+  films:
+    - 1
+  pilots:
+    - 4
+- id: 21
+  name: Slave 1
+  model: Firespray-31-class patrol and attack
+  starship_class: Patrol craft
+  manufacturer: Kuat Systems Engineering
+  cost_in_credits:
+  length: 21.5
+  crew: 1
+  passengers: 6
+  max_atmosphering_speed: 1000
+  hyperdrive_rating: 3.0
+  mglt: 70
+  cargo_capacity: 70000
+  consumables: 1 month
+  films:
+    - 2
+    - 5
+  pilots:
+    - 22
+- id: 22
+  name: Imperial shuttle
+  model: Lambda-class T-4a shuttle
+  starship_class: Armed government transport
+  manufacturer: Sienar Fleet Systems
+  cost_in_credits: 240000
+  length: 20
+  crew: 6
+  passengers: 20
+  max_atmosphering_speed: 850
+  hyperdrive_rating: 1.0
+  mglt: 50
+  cargo_capacity: 80000
+  consumables: 2 months
+  films:
+    - 2
+    - 3
+  pilots:
+    - 1
+    - 13
+    - 14
+- id: 23
+  name: EF76 Nebulon-B escort frigate
+  model: EF76 Nebulon-B escort frigate
+  starship_class: Escort ship
+  manufacturer: Kuat Drive Yards
+  cost_in_credits: 8500000
+  length: 300
+  crew: 854
+  passengers: 75
+  max_atmosphering_speed: 800
+  hyperdrive_rating: 2.0
+  mglt: 40
+  cargo_capacity: 6000000
+  consumables: 2 years
+  films:
+    - 2
+    - 3
+  pilots:
+- id: 27
+  name: Calamari Cruiser
+  model: MC80 Liberty type Star Cruiser
+  starship_class: Star Cruiser
+  manufacturer: Mon Calamari shipyards
+  cost_in_credits: 104000000
+  length: 1200
+  crew: 5400
+  passengers: 1200
+  max_atmosphering_speed:
+  hyperdrive_rating: 1.0
+  mglt: 60
+  cargo_capacity:
+  consumables: 2 years
+  films:
+    - 3
+  pilots:
+- id: 28
+  name: A-wing
+  model: RZ-1 A-wing Interceptor
+  starship_class: Starfighter
+  manufacturer: Alliance Underground Engineering, Incom Corporation
+  cost_in_credits: 175000
+  length: 9.6
+  crew: 1
+  passengers: 0
+  max_atmosphering_speed: 1300
+  hyperdrive_rating: 1.0
+  mglt: 120
+  cargo_capacity: 40
+  consumables: 1 week
+  films:
+    - 3
+  pilots:
+    - 29
+- id: 29
+  name: B-wing
+  model: A/SF-01 B-wing starfighter
+  starship_class: Assault Starfighter
+  manufacturer: Slayn & Korpil
+  cost_in_credits: 220000
+  length: 16.9
+  crew: 1
+  passengers: 0
+  max_atmosphering_speed: 950
+  hyperdrive_rating: 2.0
+  mglt: 91
+  cargo_capacity: 45
+  consumables: 1 week
+  films:
+    - 3
+  pilots:
+- id: 31
+  name: Republic Cruiser
+  model: Consular-class cruiser
+  starship_class: Space cruiser
+  manufacturer: Corellian Engineering Corporation
+  cost_in_credits:
+  length: 115
+  crew: 9
+  passengers: 16
+  max_atmosphering_speed: 900
+  hyperdrive_rating: 2.0
+  mglt:
+  cargo_capacity:
+  consumables:
+  films:
+    - 4
+  pilots:
+- id: 39
+  name: Naboo fighter
+  model: N-1 starfighter
+  starship_class: Starfighter
+  manufacturer: Theed Palace Space Vessel Engineering Corps
+  cost_in_credits: 200000
+  length: 11
+  crew: 1
+  passengers: 0
+  max_atmosphering_speed: 1100
+  hyperdrive_rating: 1.0
+  mglt:
+  cargo_capacity: 65
+  consumables: 7 days
+  films:
+    - 5
+    - 4
+  pilots:
+    - 11
+    - 60
+    - 35
+- id: 40
+  name: Naboo Royal Starship
+  model: J-type 327 Nubian royal starship
+  starship_class: yacht
+  manufacturer: Theed Palace Space Vessel Engineering Corps, Nubia Star Drives
+  cost_in_credits:
+  length: 76
+  crew: 8
+  passengers:
+  max_atmosphering_speed: 920
+  hyperdrive_rating: 1.8
+  mglt:
+  cargo_capacity:
+  consumables:
+  films:
+    - 4
+  pilots:
+    - 39
+- id: 41
+  name: Scimitar
+  model: Star Courier
+  starship_class: Space Transport
+  manufacturer: Republic Sienar Systems
+  cost_in_credits: 55000000
+  length: 26.5
+  crew: 1
+  passengers: 6
+  max_atmosphering_speed: 1180
+  hyperdrive_rating: 1.5
+  mglt:
+  cargo_capacity: 2500000
+  consumables: 30 days
+  films:
+    - 4
+  pilots:
+    - 44
+- id: 43
+  name: J-type diplomatic barge
+  model: J-type diplomatic barge
+  starship_class: Diplomatic barge
+  manufacturer: Theed Palace Space Vessel Engineering Corps, Nubia Star Drives
+  cost_in_credits: 2000000
+  length: 39
+  crew: 5
+  passengers: 10
+  max_atmosphering_speed: 2000
+  hyperdrive_rating: 0.7
+  mglt:
+  cargo_capacity:
+  consumables: 1 year
+  films:
+    - 5
+  pilots:
+- id: 47
+  name: AA-9 Coruscant freighter
+  model: Botajef AA-9 Freighter-Liner
+  starship_class: freighter
+  manufacturer: Botajef Shipyards
+  cost_in_credits:
+  length: 390
+  crew:
+  passengers: 30000
+  max_atmosphering_speed:
+  hyperdrive_rating:
+  mglt:
+  cargo_capacity:
+  consumables:
+  films:
+    - 5
+  pilots:
+- id: 48
+  name: Jedi starfighter
+  model: Delta-7 Aethersprite-class interceptor
+  starship_class: Starfighter
+  manufacturer: Kuat Systems Engineering
+  cost_in_credits: 180000
+  length: 8
+  crew: 1
+  passengers: 0
+  max_atmosphering_speed: 1150
+  hyperdrive_rating: 1.0
+  mglt:
+  cargo_capacity: 60
+  consumables: 7 days
+  films:
+    - 5
+    - 6
+  pilots:
+    - 10
+    - 58
+- id: 49
+  name: H-type Nubian yacht
+  model: H-type Nubian yacht
+  starship_class: yacht
+  manufacturer: Theed Palace Space Vessel Engineering Corps
+  cost_in_credits:
+  length: 47.9
+  crew: 4
+  passengers:
+  max_atmosphering_speed: 8000
+  hyperdrive_rating: 0.9
+  mglt:
+  cargo_capacity:
+  consumables:
+  films:
+    - 5
+  pilots:
+    - 35
+- id: 3
+  name: Star Destroyer
+  model: Imperial I-class Star Destroyer
+  starship_class: Star Destroyer
+  manufacturer: Kuat Drive Yards
+  cost_in_credits: 150000000
+  length: 1,600
+  crew: 47060
+  passengers: 0
+  max_atmosphering_speed: 975
+  hyperdrive_rating: 2.0
+  mglt: 60
+  cargo_capacity: 36000000
+  consumables: 2 years
+  films:
+    - 2
+    - 3
+    - 1
+  pilots:
+- id: 59
+  name: Trade Federation cruiser
+  model: Providence-class carrier/destroyer
+  starship_class: capital ship
+  manufacturer: Rendili StarDrive, Free Dac Volunteers Engineering corps.
+  cost_in_credits: 125000000
+  length: 1088
+  crew: 600
+  passengers: 48247
+  max_atmosphering_speed: 1050
+  hyperdrive_rating: 1.5
+  mglt:
+  cargo_capacity: 50000000
+  consumables: 4 years
+  films:
+    - 6
+  pilots:
+    - 10
+    - 11
+- id: 61
+  name: Theta-class T-2c shuttle
+  model: Theta-class T-2c shuttle
+  starship_class: transport
+  manufacturer: Cygnus Spaceworks
+  cost_in_credits: 1000000
+  length: 18.5
+  crew: 5
+  passengers: 16
+  max_atmosphering_speed: 2000
+  hyperdrive_rating: 1.0
+  mglt:
+  cargo_capacity: 50000
+  consumables: 56 days
+  films:
+    - 6
+  pilots:
+- id: 77
+  name: T-70 X-wing fighter
+  model: T-70 X-wing fighter
+  starship_class: fighter
+  manufacturer: Incom
+  cost_in_credits:
+  length:
+  crew: 1
+  passengers:
+  max_atmosphering_speed:
+  hyperdrive_rating:
+  mglt:
+  cargo_capacity:
+  consumables:
+  films:
+    - 7
+  pilots:
+    - 86
+- id: 17
+  name: Rebel transport
+  model: GR-75 medium transport
+  starship_class: Medium transport
+  manufacturer: Gallofree Yards, Inc.
+  cost_in_credits:
+  length: 90
+  crew: 6
+  passengers: 90
+  max_atmosphering_speed: 650
+  hyperdrive_rating: 4.0
+  mglt: 20
+  cargo_capacity: 19000000
+  consumables: 6 months
+  films:
+    - 2
+    - 3
+  pilots:
+- id: 32
+  name: Droid control ship
+  model: Lucrehulk-class Droid Control Ship
+  starship_class: Droid control ship
+  manufacturer: Hoersch-Kessel Drive, Inc.
+  cost_in_credits:
+  length: 3170
+  crew: 175
+  passengers: 139000
+  max_atmosphering_speed:
+  hyperdrive_rating: 2.0
+  mglt:
+  cargo_capacity: 4000000000
+  consumables: 500 days
+  films:
+    - 5
+    - 4
+    - 6
+  pilots:
+- id: 52
+  name: Republic Assault ship
+  model: Acclamator I-class assault ship
+  starship_class: assault ship
+  manufacturer: Rothana Heavy Engineering
+  cost_in_credits:
+  length: 752
+  crew: 700
+  passengers: 16000
+  max_atmosphering_speed:
+  hyperdrive_rating: 0.6
+  mglt:
+  cargo_capacity: 11250000
+  consumables: 2 years
+  films:
+    - 5
+  pilots:
+- id: 58
+  name: Solar Sailer
+  model: Punworcca 116-class interstellar sloop
+  starship_class: yacht
+  manufacturer: Huppla Pasa Tisc Shipwrights Collective
+  cost_in_credits: 35700
+  length: 15.2
+  crew: 3
+  passengers: 11
+  max_atmosphering_speed: 1600
+  hyperdrive_rating: 1.5
+  mglt:
+  cargo_capacity: 240
+  consumables: 7 days
+  films:
+    - 5
+  pilots:
+- id: 63
+  name: Republic attack cruiser
+  model: Senator-class Star Destroyer
+  starship_class: star destroyer
+  manufacturer: Kuat Drive Yards, Allanteen Six shipyards
+  cost_in_credits: 59000000
+  length: 1137
+  crew: 7400
+  passengers: 2000
+  max_atmosphering_speed: 975
+  hyperdrive_rating: 1.0
+  mglt:
+  cargo_capacity: 20000000
+  consumables: 2 years
+  films:
+    - 6
+  pilots:
+- id: 64
+  name: Naboo star skiff
+  model: J-type star skiff
+  starship_class: yacht
+  manufacturer: Theed Palace Space Vessel Engineering Corps/Nubia Star Drives, Incorporated
+  cost_in_credits:
+  length: 29.2
+  crew: 3
+  passengers: 3
+  max_atmosphering_speed: 1050
+  hyperdrive_rating: 0.5
+  mglt:
+  cargo_capacity:
+  consumables:
+  films:
+    - 6
+  pilots:
+    - 10
+    - 35
+- id: 65
+  name: Jedi Interceptor
+  model: Eta-2 Actis-class light interceptor
+  starship_class: starfighter
+  manufacturer: Kuat Systems Engineering
+  cost_in_credits: 320000
+  length: 5.47
+  crew: 1
+  passengers: 0
+  max_atmosphering_speed: 1500
+  hyperdrive_rating: 1.0
+  mglt:
+  cargo_capacity: 60
+  consumables: 2 days
+  films:
+    - 6
+  pilots:
+    - 10
+    - 11
+- id: 66
+  name: arc-170
+  model: Aggressive Reconnaissance-170 starfighte
+  starship_class: starfighter
+  manufacturer: Incom Corporation, Subpro Corporation
+  cost_in_credits: 155000
+  length: 14.5
+  crew: 3
+  passengers: 0
+  max_atmosphering_speed: 1000
+  hyperdrive_rating: 1.0
+  mglt: 100
+  cargo_capacity: 110
+  consumables: 5 days
+  films:
+    - 6
+  pilots:
+- id: 74
+  name: Belbullab-22 starfighter
+  model: Belbullab-22 starfighter
+  starship_class: starfighter
+  manufacturer: Feethan Ottraw Scalable Assemblies
+  cost_in_credits: 168000
+  length: 6.71
+  crew: 1
+  passengers: 0
+  max_atmosphering_speed: 1100
+  hyperdrive_rating: 6
+  mglt:
+  cargo_capacity: 140
+  consumables: 7 days
+  films:
+    - 6
+  pilots:
+    - 10
+    - 79
+- id: 75
+  name: V-wing
+  model: Alpha-3 Nimbus-class V-wing starfighter
+  starship_class: starfighter
+  manufacturer: Kuat Systems Engineering
+  cost_in_credits: 102500
+  length: 7.9
+  crew: 1
+  passengers: 0
+  max_atmosphering_speed: 1050
+  hyperdrive_rating: 1.0
+  mglt:
+  cargo_capacity: 60
+  consumables: 15 hours
+  films:
+    - 6
+  pilots:
+- id: 2
+  name: CR90 corvette
+  model: CR90 corvette
+  starship_class: corvette
+  manufacturer: Corellian Engineering Corporation
+  cost_in_credits: 3500000
+  length: 150
+  crew: 165
+  passengers: 600
+  max_atmosphering_speed: 950
+  hyperdrive_rating: 2.0
+  mglt: 60
+  cargo_capacity: 3000000
+  consumables: 1 year
+  films:
+    - 6
+    - 3
+    - 1
+  pilots:
+- id: 68
+  name: Banking clan frigate
+  model: Munificent-class star frigate
+  starship_class: cruiser
+  manufacturer: Hoersch-Kessel Drive, Inc, Gwori Revolutionary Industries
+  cost_in_credits: 57000000
+  length: 825
+  crew: 200
+  passengers:
+  max_atmosphering_speed:
+  hyperdrive_rating: 1.0
+  mglt:
+  cargo_capacity: 40000000
+  consumables: 2 years
+  films:
+    - 6
+  pilots:

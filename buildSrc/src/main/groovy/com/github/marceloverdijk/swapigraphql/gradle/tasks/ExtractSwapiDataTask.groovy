@@ -21,11 +21,14 @@ class ExtractSwapiDataTask extends DefaultTask {
 
         outputDir.mkdirs()
 
-        println "Retrieving planets..."
         def planets = getPagedData("planets")
         writePlanets(planets)
 
+        def starships = getPagedData("starships")
+        writeStarships(starships)
+
         println "Planets: " + planets.size()
+        println "Starships: " + starships.size()
 
         println "Done"
     }
@@ -36,16 +39,42 @@ class ExtractSwapiDataTask extends DefaultTask {
                 def properties = [
                         "id": parseId(planet.url),
                         "name": planet.name,
+                        "diameter": ignoreUnknown(planet.diameter),
                         "rotation_period": ignoreUnknown(planet.rotation_period),
                         "orbital_period": ignoreUnknown(planet.orbital_period),
-                        "diameter": ignoreUnknown(planet.diameter),
-                        "climate": ignoreUnknown(planet.climate),
                         "gravity": ignoreUnknown(planet.gravity),
+                        "population": ignoreUnknown(planet.population),
+                        "climate": ignoreUnknown(planet.climate),
                         "terrain": ignoreUnknown(planet.terrain),
                         "surface_water": ignoreUnknown(planet.surface_water),
-                        "population": ignoreUnknown(planet.population),
                         "residents": getIds(planet.residents),
                         "films": getIds(planet.films)
+                ]
+                writeEntry(out, properties)
+            }
+        }
+    }
+
+    def writeStarships(starships) {
+        new File(outputDir, "starships.yml").withWriter { out ->
+            starships.each { starship ->
+                def properties = [
+                        "id": parseId(starship.url),
+                        "name": starship.name,
+                        "model": starship.model,
+                        "starship_class": starship.starship_class,
+                        "manufacturer": ignoreUnknown(starship.manufacturer),
+                        "cost_in_credits": ignoreUnknown(starship.cost_in_credits),
+                        "length": ignoreUnknown(starship.length),
+                        "crew": ignoreUnknown(starship.crew),
+                        "passengers": ignoreUnknown(starship.passengers),
+                        "max_atmosphering_speed": ignoreUnknown(starship.max_atmosphering_speed),
+                        "hyperdrive_rating": ignoreUnknown(starship.hyperdrive_rating),
+                        "mglt": ignoreUnknown(starship.MGLT),
+                        "cargo_capacity": ignoreUnknown(starship.cargo_capacity),
+                        "consumables": ignoreUnknown(starship.consumables),
+                        "films": getIds(starship.films),
+                        "pilots": getIds(starship.pilots)
                 ]
                 writeEntry(out, properties)
             }
@@ -68,8 +97,7 @@ class ExtractSwapiDataTask extends DefaultTask {
     }
 
     def ignoreUnknown(value) {
-        // TODO what about N/A
-        return value == "unknown" ? null : value
+        return (("unknown").equalsIgnoreCase(value) || "n/a".equalsIgnoreCase(value)) ? null : value
     }
 
     def writeEntry(out, properties) {
@@ -93,6 +121,7 @@ class ExtractSwapiDataTask extends DefaultTask {
         def hasNext = true
         def page = 1
         while (hasNext) {
+            println "Retrieving ${path} page ${page}..."
             def data = getData("${path}?page=${page}")
             results += data.results
             hasNext = data.next != null
