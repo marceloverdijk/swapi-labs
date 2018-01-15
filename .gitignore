@@ -10,6 +10,7 @@
 
 /bin
 /build
+/buildSrc/build
 /classes
 /lib
 /log
