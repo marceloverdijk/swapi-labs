@@ -1,4 +1,4 @@
-package com.github.marceloverdijk.swaphql.model;
+package com.github.marceloverdijk.swapigraphql.model;
 
 import javax.persistence.Column;
 import javax.persistence.Id;

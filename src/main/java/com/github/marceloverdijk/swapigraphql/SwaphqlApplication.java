@@ -1,4 +1,4 @@
-package com.github.marceloverdijk.swaphql;
+package com.github.marceloverdijk.swapigraphql;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

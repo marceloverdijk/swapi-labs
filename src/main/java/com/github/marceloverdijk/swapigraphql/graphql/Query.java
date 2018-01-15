@@ -1,8 +1,8 @@
-package com.github.marceloverdijk.swaphql.graphql;
+package com.github.marceloverdijk.swapigraphql.graphql;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
-import com.github.marceloverdijk.swaphql.model.Planet;
-import com.github.marceloverdijk.swaphql.repository.PlanetRepository;
+import com.github.marceloverdijk.swapigraphql.model.Planet;
+import com.github.marceloverdijk.swapigraphql.repository.PlanetRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.github.marceloverdijk.swaphql.repository;
+package com.github.marceloverdijk.swapigraphql.repository;
 
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.PagingAndSortingRepository;

@@ -1,4 +1,4 @@
-package com.github.marceloverdijk.swaphql.graphql;
+package com.github.marceloverdijk.swapigraphql.graphql;
 
 import graphql.schema.Coercing;
 import graphql.schema.GraphQLScalarType;
@@ -6,15 +6,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Component
-public class DateTimeScalarType extends GraphQLScalarType {
+public class DateScalarType extends GraphQLScalarType {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(DateTimeScalarType.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(DateScalarType.class);
 
-    public DateTimeScalarType() {
-        super("DateTime", "A DateTime type", new Coercing<LocalDateTime, String>() {
+    public DateScalarType() {
+        super("Date", "A Date type", new Coercing<LocalDate, String>() {
 
             @Override
             public String serialize(final Object input) {
@@ -23,13 +23,13 @@ public class DateTimeScalarType extends GraphQLScalarType {
             }
 
             @Override
-            public LocalDateTime parseValue(final Object input) {
+            public LocalDate parseValue(final Object input) {
                 // TODO
                 return null;
             }
 
             @Override
-            public LocalDateTime parseLiteral(final Object input) {
+            public LocalDate parseLiteral(final Object input) {
                 // TODO
                 return null;
             }

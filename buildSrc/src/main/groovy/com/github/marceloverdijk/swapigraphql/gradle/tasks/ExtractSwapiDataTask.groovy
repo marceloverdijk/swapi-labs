@@ -1,4 +1,4 @@
-package com.github.marceloverdijk.swaphql.gradle.tasks
+package com.github.marceloverdijk.swapigraphql.gradle.tasks
 
 import groovy.json.JsonSlurper
 import org.gradle.api.DefaultTask

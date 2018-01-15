@@ -73,8 +73,8 @@ querydsl {
     jpa = true
 }
 
-task extractSwapiData(type: com.github.marceloverdijk.swaphql.gradle.tasks.ExtractSwapiDataTask) {
+task extractSwapiData(type: com.github.marceloverdijk.swapigraphql.gradle.tasks.ExtractSwapiDataTask) {
 }
 
-task generateDataSqlFile(type: com.github.marceloverdijk.swaphql.gradle.tasks.GenerateDataSqlFileTask) {
+task generateDataSqlFile(type: com.github.marceloverdijk.swapigraphql.gradle.tasks.GenerateDataSqlFileTask) {
 }
