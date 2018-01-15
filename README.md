@@ -1,5 +1,5 @@
-# SWAPHQL
+# SWAPI GraphQL
 
-## The Star Wars GraphQL
+## The Star Wars API GraphQL
 
 TODO
