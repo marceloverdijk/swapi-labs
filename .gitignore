@@ -16,3 +16,12 @@
 /log
 /out
 /target
+
+/swapi-labs-*/bin
+/swapi-labs-*/build
+/swapi-labs-*/buildSrc/build
+/swapi-labs-*/classes
+/swapi-labs-*/lib
+/swapi-labs-*/log
+/swapi-labs-*/out
+/swapi-labs-*/target
