@@ -159,7 +159,18 @@ class SwapiDataExporter implements Exporter {
         }
         dataFile << LS
 
-        // TODO intersection tables
+        species.each {
+            def speciesId = it.id
+            it.people?.each {
+                def personId = it.id
+                dataFile << "INSERT INTO species_person (species_id, person_id) VALUES "
+                dataFile << "(" + writeNumberValue(speciesId)
+                dataFile << ", " + writeNumberValue(personId)
+                dataFile << ");"
+                dataFile << LS
+            }
+        }
+        dataFile << LS
     }
 
     def writeVehicleInserts(List<Vehicle> vehicles) {
@@ -184,7 +195,18 @@ class SwapiDataExporter implements Exporter {
         }
         dataFile << LS
 
-        // TODO intersection tables
+        vehicles.each {
+            def vehicleId = it.id
+            it.pilots?.each {
+                def personId = it.id
+                dataFile << "INSERT INTO vehicle_pilot (vehicle_id, person_id) VALUES "
+                dataFile << "(" + writeNumberValue(vehicleId)
+                dataFile << ", " + writeNumberValue(personId)
+                dataFile << ");"
+                dataFile << LS
+            }
+        }
+        dataFile << LS
     }
 
     def writeStarshipInserts(List<Starship> starships) {
@@ -211,7 +233,18 @@ class SwapiDataExporter implements Exporter {
         }
         dataFile << LS
 
-        // TODO intersection tables
+        starships.each {
+            def starshipId = it.id
+            it.pilots?.each {
+                def personId = it.id
+                dataFile << "INSERT INTO starship_pilot (starship_id, person_id) VALUES "
+                dataFile << "(" + writeNumberValue(starshipId)
+                dataFile << ", " + writeNumberValue(personId)
+                dataFile << ");"
+                dataFile << LS
+            }
+        }
+        dataFile << LS
     }
 
     def writeFilmInserts(List<Film> films) {
@@ -231,7 +264,58 @@ class SwapiDataExporter implements Exporter {
         }
         dataFile << LS
 
-        // TODO intersection tables
+        films.each {
+            def filmId = it.id
+
+            it.characters?.each {
+                def personId = it.id
+                dataFile << "INSERT INTO film_character (film_id, person_id) VALUES "
+                dataFile << "(" + writeNumberValue(filmId)
+                dataFile << ", " + writeNumberValue(personId)
+                dataFile << ");"
+                dataFile << LS
+            }
+            dataFile << LS
+
+            it.planets?.each {
+                def planetId = it.id
+                dataFile << "INSERT INTO film_planet (film_id, planet_id) VALUES "
+                dataFile << "(" + writeNumberValue(filmId)
+                dataFile << ", " + writeNumberValue(planetId)
+                dataFile << ");"
+                dataFile << LS
+            }
+            dataFile << LS
+
+            it.starships?.each {
+                def starshipId = it.id
+                dataFile << "INSERT INTO film_starship (film_id, starship_id) VALUES "
+                dataFile << "(" + writeNumberValue(filmId)
+                dataFile << ", " + writeNumberValue(starshipId)
+                dataFile << ");"
+                dataFile << LS
+            }
+            dataFile << LS
+
+            it.vehicles?.each {
+                def vehicleId = it.id
+                dataFile << "INSERT INTO film_vehicle (film_id, vehicle_id) VALUES "
+                dataFile << "(" + writeNumberValue(filmId)
+                dataFile << ", " + writeNumberValue(vehicleId)
+                dataFile << ");"
+                dataFile << LS
+            }
+            dataFile << LS
+
+            it.species?.each {
+                def speciesId = it.id
+                dataFile << "INSERT INTO film_species (film_id, species_id) VALUES "
+                dataFile << "(" + writeNumberValue(filmId)
+                dataFile << ", " + writeNumberValue(speciesId)
+                dataFile << ");"
+                dataFile << LS
+            }
+        }
     }
 
     def isNotUnknown(s) {
