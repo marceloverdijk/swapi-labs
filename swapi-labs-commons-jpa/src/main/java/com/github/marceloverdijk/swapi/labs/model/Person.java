@@ -44,7 +44,7 @@ public class Person extends BaseModel<Long> {
     private Integer height;
 
     @Column(name = "mass")
-    private Integer mass;
+    private Double mass;
 
     @Column(name = "hair_color")
     private String hairColor;
@@ -93,11 +93,11 @@ public class Person extends BaseModel<Long> {
         this.height = height;
     }
 
-    public Integer getMass() {
+    public Double getMass() {
         return mass;
     }
 
-    public void setMass(final Integer mass) {
+    public void setMass(final Double mass) {
         this.mass = mass;
     }
 

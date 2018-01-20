@@ -21,6 +21,7 @@ import com.github.swapi4j.exporter.Exporter
 import com.github.swapi4j.model.Film
 import com.github.swapi4j.model.Person
 import com.github.swapi4j.model.Planet
+import com.github.swapi4j.model.ResourceUrl
 import com.github.swapi4j.model.Species
 import com.github.swapi4j.model.Starship
 import com.github.swapi4j.model.Vehicle
@@ -58,7 +59,6 @@ class SwapiDataExporter implements Exporter {
     static String LS = System.getProperty("line.separator")
 
     File dataFile
-    Long unknownPlanetId
 
     SwapiDataExporter(File dataFile) {
         this.dataFile = dataFile
@@ -73,9 +73,11 @@ class SwapiDataExporter implements Exporter {
             List<Vehicle> vehicles,
             List<Starship> starships) {
 
-        // Find and remove the "unknown" planet.
-        unknownPlanetId = planets.find { ("unknown").equalsIgnoreCase(it.name) }.id
-        planets.removeAll { it.id == unknownPlanetId }
+        // Find and remove the "unknown" planet (and its references).
+        def unknown = planets.find { ("unknown").equalsIgnoreCase(it.name) }.id
+        planets.removeAll { it.id == unknown }
+        persons.each { if (it.homeworld?.id == unknown) it.homeworld = null }
+        species.each { if (it.homeworld?.id == unknown) it.homeworld = null }
 
         // Sort data structures.
         planets = planets.sort { it.id }
@@ -95,372 +97,174 @@ class SwapiDataExporter implements Exporter {
     }
 
     def writePlanetInserts(List<Planet> planets) {
-        dataFile << "INSERT INTO planet"
-        dataFile << "  (id, name, rotation_period, orbital_period, diameter, climate, gravity, terrain, surface_water, population, created, edited)"
-        dataFile << "VALUES"
-        planets.eachWithIndex { it, i ->
-            if (i > 0) dataFile << ","
+        planets.each {
+            dataFile << "INSERT INTO planet (id, name, rotation_period, orbital_period, diameter, climate, gravity, terrain, surface_water, population, created, edited) VALUES "
+            dataFile << "(" + writeNumberValue(it.id)
+            dataFile << ", " + writeStringValue(it.name)
+            dataFile << ", " + writeNumberValue(it.rotationPeriod)
+            dataFile << ", " + writeNumberValue(it.orbitalPeriod)
+            dataFile << ", " + writeNumberValue(it.diameter)
+            dataFile << ", " + writeStringValue(it.climate)
+            dataFile << ", " + writeStringValue(it.gravity)
+            dataFile << ", " + writeStringValue(it.terrain)
+            dataFile << ", " + writeNumberValue(it.surfaceWater)
+            dataFile << ", " + writeNumberValue(it.population)
+            dataFile << ", " + writeStringValue(it.created)
+            dataFile << ", " + writeStringValue(it.edited)
+            dataFile << ");"
             dataFile << LS
-            dataFile << "  "
-            dataFile << "(" + it.id
-            dataFile << ", '" + sanitize(it.name) + "'"
-            dataFile << ")"
-            // TODO
         }
-        dataFile << ";"
-        dataFile << LS
         dataFile << LS
     }
 
     def writePersonInserts(List<Person> persons) {
-        dataFile << "INSERT INTO person"
-        dataFile << "  (id, name, height, mass, hair_color, skin_color, eye_color, birth_year, gender, homeworld, created, edited)"
-        dataFile << "VALUES"
-        persons.eachWithIndex { it, i ->
-            if (i > 0) dataFile << ","
+        persons.each {
+            dataFile << "INSERT INTO person (id, name, height, mass, hair_color, skin_color, eye_color, birth_year, gender, homeworld, created, edited) VALUES "
+            dataFile << "(" + writeNumberValue(it.id)
+            dataFile << ", " + writeStringValue(it.name)
+            dataFile << ", " + writeNumberValue(it.height)
+            dataFile << ", " + writeNumberValue(it.mass)
+            dataFile << ", " + writeStringValue(it.hairColor)
+            dataFile << ", " + writeStringValue(it.skinColor)
+            dataFile << ", " + writeStringValue(it.eyeColor)
+            dataFile << ", " + writeStringValue(it.birthYear)
+            dataFile << ", " + writeStringValue(it.gender)
+            dataFile << ", " + writeNumberValue(it.homeworld)
+            dataFile << ", " + writeStringValue(it.created)
+            dataFile << ", " + writeStringValue(it.edited)
+            dataFile << ");"
             dataFile << LS
-            dataFile << "  "
-            dataFile << "(" + it.id
-            dataFile << ", '" + sanitize(it.name) + "'"
-            dataFile << ")"
-            // TODO
         }
-        dataFile << ";"
-        dataFile << LS
         dataFile << LS
     }
 
     def writeSpeciesInserts(List<Species> species) {
-        dataFile << "INSERT INTO species"
-        dataFile << "  (id, name, classification, designation, average_height, skin_colors, hair_colors, eye_colors, average_lifespan, homeworld, language, created, edited)"
-        dataFile << "VALUES"
-        species.eachWithIndex { it, i ->
-            if (i > 0) dataFile << ","
+        species.each {
+            dataFile << "INSERT INTO species (id, name, classification, designation, average_height, skin_colors, hair_colors, eye_colors, average_lifespan, homeworld, language, created, edited) VALUES "
+            dataFile << "(" + writeNumberValue(it.id)
+            dataFile << ", " + writeStringValue(it.name)
+            dataFile << ", " + writeStringValue(it.classification)
+            dataFile << ", " + writeStringValue(it.designation)
+            dataFile << ", " + writeNumberValue(it.averageHeight)
+            dataFile << ", " + writeStringValue(it.skinColors)
+            dataFile << ", " + writeStringValue(it.hairColors)
+            dataFile << ", " + writeStringValue(it.eyeColors)
+            dataFile << ", " + writeNumberValue(it.averageLifespan)
+            dataFile << ", " + writeNumberValue(it.homeworld)
+            dataFile << ", " + writeStringValue(it.language)
+            dataFile << ", " + writeStringValue(it.created)
+            dataFile << ", " + writeStringValue(it.edited)
+            dataFile << ");"
             dataFile << LS
-            dataFile << "  "
-            dataFile << "(" + it.id
-            dataFile << ", '" + sanitize(it.name) + "'"
-            dataFile << ")"
-            // TODO
         }
-        dataFile << ";"
-        dataFile << LS
         dataFile << LS
 
         // TODO intersection tables
     }
 
     def writeVehicleInserts(List<Vehicle> vehicles) {
-        dataFile << "INSERT INTO vehicle"
-        dataFile << "  (id, name, model, manufacturer, cost_in_credits, length, max_atmosphering_speed, crew, passengers, cargo_capacity, consumables, vehicle_class, created, edited)"
-        dataFile << "VALUES"
-        vehicles.eachWithIndex { it, i ->
-            if (i > 0) dataFile << ","
+        vehicles.each {
+            dataFile << "INSERT INTO vehicle (id, name, model, manufacturer, cost_in_credits, length, max_atmosphering_speed, crew, passengers, cargo_capacity, consumables, vehicle_class, created, edited) VALUES "
+            dataFile << "(" + writeNumberValue(it.id)
+            dataFile << ", " + writeStringValue(it.name)
+            dataFile << ", " + writeStringValue(it.model)
+            dataFile << ", " + writeStringValue(it.manufacturer)
+            dataFile << ", " + writeNumberValue(it.costInCredits)
+            dataFile << ", " + writeNumberValue(it.length)
+            dataFile << ", " + writeNumberValue(it.maxAtmospheringSpeed)
+            dataFile << ", " + writeNumberValue(it.crew)
+            dataFile << ", " + writeNumberValue(it.passengers)
+            dataFile << ", " + writeNumberValue(it.cargoCapacity)
+            dataFile << ", " + writeStringValue(it.consumables)
+            dataFile << ", " + writeStringValue(it.vehicleClass)
+            dataFile << ", " + writeStringValue(it.created)
+            dataFile << ", " + writeStringValue(it.edited)
+            dataFile << ");"
             dataFile << LS
-            dataFile << "  "
-            dataFile << "(" + it.id
-            dataFile << ", '" + sanitize(it.name) + "'"
-            dataFile << ")"
-            // TODO
         }
-        dataFile << ";"
-        dataFile << LS
         dataFile << LS
 
         // TODO intersection tables
     }
 
     def writeStarshipInserts(List<Starship> starships) {
-        dataFile << "INSERT INTO starship"
-        dataFile << "  (id, name, model, manufacturer, cost_in_credits, length, max_atmosphering_speed, crew, passengers, cargo_capacity, consumables, hyperdrive_rating, mglt, starship_class, created)"
-        dataFile << "VALUES"
-        starships.eachWithIndex { it, i ->
-            if (i > 0) dataFile << ","
+        starships.each {
+            dataFile << "INSERT INTO starship (id, name, model, manufacturer, cost_in_credits, length, max_atmosphering_speed, crew, passengers, cargo_capacity, consumables, hyperdrive_rating, mglt, starship_class, created, edited) VALUES "
+            dataFile << "(" + writeNumberValue(it.id)
+            dataFile << ", " + writeStringValue(it.name)
+            dataFile << ", " + writeStringValue(it.model)
+            dataFile << ", " + writeStringValue(it.manufacturer)
+            dataFile << ", " + writeNumberValue(it.costInCredits)
+            dataFile << ", " + writeNumberValue(it.length)
+            dataFile << ", " + writeNumberValue(it.maxAtmospheringSpeed)
+            dataFile << ", " + writeNumberValue(it.crew)
+            dataFile << ", " + writeNumberValue(it.passengers)
+            dataFile << ", " + writeNumberValue(it.cargoCapacity)
+            dataFile << ", " + writeStringValue(it.consumables)
+            dataFile << ", " + writeNumberValue(it.hyperdriveRating)
+            dataFile << ", " + writeNumberValue(it.MGLT)
+            dataFile << ", " + writeStringValue(it.starshipClass)
+            dataFile << ", " + writeStringValue(it.created)
+            dataFile << ", " + writeStringValue(it.edited)
+            dataFile << ");"
             dataFile << LS
-            dataFile << "  "
-            dataFile << "(" + it.id
-            dataFile << ", '" + sanitize(it.name) + "'"
-            dataFile << ")"
-            // TODO
         }
-        dataFile << ";"
-        dataFile << LS
         dataFile << LS
 
         // TODO intersection tables
     }
 
     def writeFilmInserts(List<Film> films) {
-        dataFile << "INSERT INTO film"
-        dataFile << "  (id, title, episode_id, opening_crawl, director, producer, release_date, created, edited)"
-        dataFile << "VALUES"
-        films.eachWithIndex { it, i ->
-            if (i > 0) dataFile << ","
+        films.each {
+            dataFile << "INSERT INTO film (id, title, episode_id, opening_crawl, director, producer, release_date, created, edited) VALUES"
+            dataFile << "(" + writeNumberValue(it.id)
+            dataFile << ", " + writeStringValue(it.title)
+            dataFile << ", " + writeNumberValue(it.episodeId)
+            dataFile << ", " + writeStringValue(it.openingCrawl)
+            dataFile << ", " + writeStringValue(it.director)
+            dataFile << ", " + writeStringValue(it.producer)
+            dataFile << ", " + writeStringValue(it.releaseDate)
+            dataFile << ", " + writeStringValue(it.created)
+            dataFile << ", " + writeStringValue(it.edited)
+            dataFile << ");"
             dataFile << LS
-            dataFile << "  "
-            dataFile << "(" + it.id
-            dataFile << ", '" + sanitize(it.title) + "'"
-            dataFile << ")"
-            // TODO
         }
-        dataFile << ";"
-        dataFile << LS
         dataFile << LS
 
         // TODO intersection tables
     }
 
-    def sanitize(String s) {
-        def sanitized = s
-        if ("unknown".equalsIgnoreCase(s) || "n/a".equalsIgnoreCase(s)) {
-            sanitized = null
-        }
-        if (sanitized) {
-            // Escape quotes
-            sanitized = sanitized.replaceAll (/'/,/''/)
-        }
+    def isNotUnknown(s) {
+        return !("unknown".equalsIgnoreCase(s) || "n/a".equalsIgnoreCase(s))
     }
 
-    def calculateMaxLengths(maxLengths, obj) {
-        obj.properties.keySet().each { k ->
-            if (k == "class") return
-            def v = obj.properties[k]
-            def length
-            if (!v) {
-                length = 0
-            } else if (v instanceof List) {
-                length = v.size()
-            } else if (v instanceof Long) {
-                length = v
-            } else if (v instanceof Double) {
-                length = v.longValue()
-            } else if (v instanceof String) {
-                if (v.isDouble()) {
-                    length = Double.parseDouble(v).longValue()
-                } else if (v.isLong()) {
-                    length = Long.parseLong(v)
-                } else {
-                    if ("unknown".equalsIgnoreCase(v) || "n/a".equalsIgnoreCase(v)) {
-                        length = 0
-                    } else {
-                        length = v.length()
+    def writeStringValue(value) {
+        def result = "NULL"
+        if (value) {
+            if (!["unknown", "n/a"].contains(value)) {
+                result = value.replaceAll (/'/,/''/) // Escape quotes (by doubling them).
+                result = "'${result}'" // Quote the string value.
+            }
+        }
+        return result
+    }
+
+    def writeNumberValue(value) {
+        def result = "NULL"
+        if (value) {
+            if (!["unknown", "none", "n/a", "indefinite"].contains(value)) {
+                if (value instanceof ResourceUrl) {
+                    result = value.id
+                } else if (value instanceof String) {
+                    if (value.endsWith("km")) {
+                        value = value.substring(0, value.length() - 2) // Remove 'km' suffix.
                     }
-                }
-            } else {
-                if (v) {
-                    length = v.toString().length()
+                    result = value.replaceAll (/,/,/./) // Replace comma with dot (change decimal separator).
                 } else {
-                    length = 0
+                    result = value
                 }
             }
-            if (!maxLengths[k] || length > maxLengths[k]) {
-                maxLengths[k] = length
-            }
         }
+        return result
     }
-
-    def printMaxLengths(name, maxLengths) {
-        println "${name}:"
-        maxLengths.each { k, v ->
-            println "  - ${k} = ${v}"
-        }
-    }
-
-//    def writePeople(people) {
-//        new File(outputDir, "people.yml").withWriter { out ->
-//            people.each { person ->
-//                def homeworld = person.homeworld ? parseId(person.homeworld) : null
-//                if (homeworld == unknownPlanetId) {
-//                    // Remove reference to the "unknown" planet and instead use "null".
-//                    homeworld = null
-//                }
-//                def properties = [
-//                        "id": parseId(person.url),
-//                        "name": person.name,
-//                        "height": ignoreUnknown(person.height),
-//                        "mass": ignoreUnknown(person.mass),
-//                        "hair_color": ignoreUnknown(person.hair_color),
-//                        "skin_color": ignoreUnknown(person.skin_color),
-//                        "eye_color": ignoreUnknown(person.eye_color),
-//                        "birth_year": ignoreUnknown(person.birth_year),
-//                        "gender": ignoreUnknown(person.gender),
-//                        "homeworld": homeworld,
-//                        "films": getIds(person.films),
-//                        "species": getIds(person.species),
-//                        "vehicles": getIds(person.vehicles),
-//                        "starships": getIds(person.starships),
-//                        "created": person.created,
-//                        "edited": person.edited
-//                ]
-//                writeEntry(out, properties)
-//            }
-//        }
-//    }
-//
-//    def writePlanets(planets) {
-//        new File(outputDir, "planets.yml").withWriter { out ->
-//            planets.each { planet ->
-//                def properties = [
-//                        "id": parseId(planet.url),
-//                        "name": planet.name,
-//                        "rotation_period": ignoreUnknown(planet.rotation_period),
-//                        "orbital_period": ignoreUnknown(planet.orbital_period),
-//                        "diameter": ignoreUnknown(planet.diameter),
-//                        "climate": ignoreUnknown(planet.climate),
-//                        "gravity": ignoreUnknown(planet.gravity),
-//                        "terrain": ignoreUnknown(planet.terrain),
-//                        "surface_water": ignoreUnknown(planet.surface_water),
-//                        "population": ignoreUnknown(planet.population),
-//                        "residents": getIds(planet.residents),
-//                        "films": getIds(planet.films),
-//                        "created": planet.created,
-//                        "edited": planet.edited
-//                ]
-//                writeEntry(out, properties)
-//            }
-//        }
-//    }
-//
-//    def writeFilms(films) {
-//        new File(outputDir, "films.yml").withWriter { out ->
-//            films.each { film ->
-//                def properties = [
-//                        "id": parseId(film.url),
-//                        "title": film.title,
-//                        "episode_id": film.episode_id,
-//                        "opening_crawl": film.opening_crawl ? "|- ${film.opening_crawl}" : null,
-//                        "director": ignoreUnknown(film.director),
-//                        "producer": ignoreUnknown(film.producer),
-//                        "release_date": ignoreUnknown(film.release_date),
-//                        "characters": getIds(film.characters),
-//                        "planets": getIds(film.planets),
-//                        "starships": getIds(film.starships),
-//                        "vehicles": getIds(film.vehicles),
-//                        "species": getIds(film.species),
-//                        "created": film.created,
-//                        "edited": film.edited
-//                ]
-//                writeEntry(out, properties)
-//            }
-//        }
-//    }
-//
-//    def writeSpecies(species) {
-//        new File(outputDir, "species.yml").withWriter { out ->
-//            species.each { specie ->
-//                def properties = [
-//                        "id": parseId(specie.url),
-//                        "name": specie.name,
-//                        "classification": ignoreUnknown(specie.classification),
-//                        "designation": ignoreUnknown(specie.designation),
-//                        "average_height": ignoreUnknown(specie.average_height),
-//                        "skin_colors": ignoreUnknown(specie.skin_colors),
-//                        "hair_colors": ignoreUnknown(specie.hair_colors),
-//                        "eye_colors": ignoreUnknown(specie.eye_colors),
-//                        "average_lifespan": ignoreUnknown(specie.average_lifespan),
-//                        "homeworld": specie.homeworld ? parseId(specie.homeworld) : null,
-//                        "language": ignoreUnknown(specie.language),
-//                        "people": getIds(specie.people),
-//                        "films": getIds(specie.films),
-//                        "created": specie.created,
-//                        "edited": specie.edited
-//                ]
-//                writeEntry(out, properties)
-//            }
-//        }
-//    }
-//
-//    def writeVehicles(vehicles) {
-//        new File(outputDir, "vehicles.yml").withWriter { out ->
-//            vehicles.each { vehicle ->
-//                def properties = [
-//                        "id": parseId(vehicle.url),
-//                        "name": vehicle.name,
-//                        "model": ignoreUnknown(vehicle.model),
-//                        "manufacturer": ignoreUnknown(vehicle.manufacturer),
-//                        "cost_in_credits": ignoreUnknown(vehicle.cost_in_credits),
-//                        "length": ignoreUnknown(vehicle.length),
-//                        "max_atmosphering_speed": ignoreUnknown(vehicle.max_atmosphering_speed),
-//                        "crew": ignoreUnknown(vehicle.crew),
-//                        "passengers": ignoreUnknown(vehicle.passengers),
-//                        "cargo_capacity": ignoreUnknown(vehicle.cargo_capacity),
-//                        "consumables": ignoreUnknown(vehicle.consumables),
-//                        "vehicle_class": ignoreUnknown(vehicle.vehicle_class),
-//                        "pilots": getIds(vehicle.pilots),
-//                        "films": getIds(vehicle.films),
-//                        "created": vehicle.created,
-//                        "edited": vehicle.edited
-//                ]
-//                writeEntry(out, properties)
-//            }
-//        }
-//    }
-//
-//    def writeStarships(starships) {
-//        new File(outputDir, "starships.yml").withWriter { out ->
-//            starships.each { starship ->
-//                def properties = [
-//                        "id": parseId(starship.url),
-//                        "name": starship.name,
-//                        "model": ignoreUnknown(starship.model),
-//                        "manufacturer": ignoreUnknown(starship.manufacturer),
-//                        "cost_in_credits": ignoreUnknown(starship.cost_in_credits),
-//                        "length": ignoreUnknown(starship.length),
-//                        "max_atmosphering_speed": ignoreUnknown(starship.max_atmosphering_speed),
-//                        "crew": ignoreUnknown(starship.crew),
-//                        "passengers": ignoreUnknown(starship.passengers),
-//                        "cargo_capacity": ignoreUnknown(starship.cargo_capacity),
-//                        "consumables": ignoreUnknown(starship.consumables),
-//                        "hyperdrive_rating": ignoreUnknown(starship.hyperdrive_rating),
-//                        "mglt": ignoreUnknown(starship.MGLT),
-//                        "starship_class": ignoreUnknown(starship.starship_class),
-//                        "pilots": getIds(starship.pilots),
-//                        "films": getIds(starship.films),
-//                        "created": starship.created,
-//                        "edited": starship.edited
-//                ]
-//                writeEntry(out, properties)
-//            }
-//        }
-//    }
-//
-//    def parseId(url) {
-//        if (url.endsWith("/")) {
-//            url = url.substring(0, url.length() - 1)
-//        }
-//        return url.substring(url.lastIndexOf("/") + 1)
-//    }
-//
-//    def getIds(links) {
-//        def ids = []
-//        links.each { link ->
-//            ids << parseId(link)
-//        }
-//        return ids
-//    }
-//
-//    // sanitize
-//    def ignoreUnknown(value) {
-//        return (("unknown").equalsIgnoreCase(value) || "n/a".equalsIgnoreCase(value)) ? null : value
-//    }
-//
-//    def writeEntry(out, properties) {
-//        properties.eachWithIndex { property, i ->
-//            def prefix = (i == 0) ? "-" : " "
-//            def name = property.key
-//            def value = property.value
-//            if (value instanceof List) {
-//                out.println "${prefix} ${name}:"
-//                value.each {
-//                    out.println "    - ${it}"
-//                }
-//            } else if ((value instanceof String || value instanceof GString) && value.startsWith("|- ")) {
-//                def block = value.substring(3).replace("\r\n", "\r\n    ")
-//                out.println "${prefix} ${name}: |-"
-//                out.println "    ${block}"
-//            } else {
-//                out.println "${prefix} ${name}:" + (value ? " ${value}" : "")
-//            }
-//        }
-//    }
 }

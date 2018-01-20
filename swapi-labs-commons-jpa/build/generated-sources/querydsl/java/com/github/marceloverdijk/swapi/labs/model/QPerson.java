@@ -46,7 +46,7 @@ public class QPerson extends EntityPathBase<Person> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final NumberPath<Integer> mass = createNumber("mass", Integer.class);
+    public final NumberPath<Double> mass = createNumber("mass", Double.class);
 
     public final StringPath name = createString("name");
 
