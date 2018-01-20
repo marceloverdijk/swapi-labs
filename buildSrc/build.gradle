@@ -1,5 +1,5 @@
 ext {
-    snakeyamlVersion = "1.19"
+    swapi4jVersion = "1.1.0"
 }
 
 repositories {
@@ -7,5 +7,5 @@ repositories {
 }
 
 dependencies {
-    compile "org.yaml:snakeyaml:${snakeyamlVersion}"
+    compile "com.github.swapi4j:swapi4j-client:${swapi4jVersion}"
 }

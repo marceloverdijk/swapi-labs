@@ -1,0 +1,10 @@
+rootProject.name = "swapi-labs"
+
+def String[] modules = [
+        "swapi-labs-commons-jpa",
+        "swapi-labs-data",
+        "swapi-labs-graphql",
+        "swapi-labs-jsonapi"
+]
+
+include modules
