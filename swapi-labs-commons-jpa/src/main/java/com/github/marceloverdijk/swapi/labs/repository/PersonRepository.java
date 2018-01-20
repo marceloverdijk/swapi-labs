@@ -17,12 +17,14 @@
 package com.github.marceloverdijk.swapi.labs.repository;
 
 import com.github.marceloverdijk.swapi.labs.model.Person;
+import org.springframework.stereotype.Repository;
 
 /**
  * The {@link Person} repository.
  *
  * @author Marcel Overdijk
  */
+@Repository
 public interface PersonRepository extends BaseRepository<Person, Long> {
 
 }

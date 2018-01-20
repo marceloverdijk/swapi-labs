@@ -33,7 +33,7 @@ import java.time.LocalDateTime;
  * @author Marcel Overdijk
  */
 @MappedSuperclass
-public abstract class BaseModel<PK extends Serializable>  {
+public abstract class BaseModel<PK extends Serializable> {
 
     @Id
     @Column(name = "id")

@@ -17,7 +17,9 @@
 package com.github.marceloverdijk.swapi.labs.graphql.query;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
+import com.github.marceloverdijk.swapi.labs.model.Person;
 import com.github.marceloverdijk.swapi.labs.model.Planet;
+import com.github.marceloverdijk.swapi.labs.repository.PersonRepository;
 import com.github.marceloverdijk.swapi.labs.repository.PlanetRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,16 +42,31 @@ public class Query implements GraphQLQueryResolver {
 
     private static Logger LOGGER = LoggerFactory.getLogger(Query.class);
 
+    private PersonRepository personRepository;
     private PlanetRepository planetRepository;
 
     @Autowired
-    public Query(PlanetRepository planetRepository) {
+    public Query(final PersonRepository personRepository, final PlanetRepository planetRepository) {
+        this.personRepository = Objects.requireNonNull(personRepository, "'personRepository' must not be null");
         this.planetRepository = Objects.requireNonNull(planetRepository, "'planetRepository' must not be null");
     }
 
     public String version() {
         LOGGER.info("version called");
         return "1.0";
+    }
+
+    public List<Person> persons(Integer page, Integer size) {
+        LOGGER.info("persons called");
+        Pageable pageable = PageRequest.of(page - 1, size, Sort.Direction.ASC, "name");
+        List<Person> persons = personRepository.findAll(pageable).getContent();
+        return persons;
+    }
+
+    public Person person(Long personId) {
+        LOGGER.info("person [{}] called", personId);
+        Person person = personRepository.findById(personId).orElse(null);
+        return person;
     }
 
     public List<Planet> planets(Integer page, Integer size) {

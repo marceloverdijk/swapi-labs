@@ -23,6 +23,10 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.List;
 
@@ -62,10 +66,14 @@ public class Planet extends BaseModel<Long> {
     @Column(name = "population")
     private Long population;
 
-    // TODO
+    @OneToMany(mappedBy = "homeworld")
     private List<Person> residents;
 
-    // TODO
+    @ManyToMany
+    @JoinTable(
+            name = "film_planet",
+            joinColumns = @JoinColumn(name = "planet_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "film_id", referencedColumnName = "id"))
     private List<Film> films;
 
     public String getName() {

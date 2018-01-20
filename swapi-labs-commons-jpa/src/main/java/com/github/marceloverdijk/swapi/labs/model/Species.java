@@ -24,6 +24,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.List;
@@ -68,10 +70,18 @@ public class Species extends BaseModel<Long> {
     @Column(name = "language")
     private String language;
 
-    // TODO
+    @ManyToMany
+    @JoinTable(
+            name = "species_person",
+            joinColumns = @JoinColumn(name = "species_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "person_id", referencedColumnName = "id"))
     private List<Person> persons;
 
-    // TODO
+    @ManyToMany
+    @JoinTable(
+            name = "film_species",
+            joinColumns = @JoinColumn(name = "species_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "film_id", referencedColumnName = "id"))
     private List<Film> films;
 
     public String getName() {

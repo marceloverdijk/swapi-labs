@@ -16,8 +16,12 @@
 
 package com.github.marceloverdijk.swapi.labs.jsonapi;
 
+import com.github.marceloverdijk.swapi.labs.model.BaseModel;
+import com.github.marceloverdijk.swapi.labs.repository.BaseRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  * The main application class.
@@ -25,6 +29,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author Marcel Overdijk
  */
 @SpringBootApplication
+@EnableJpaRepositories(basePackageClasses = BaseRepository.class)
+@EntityScan(basePackageClasses = BaseModel.class)
 public class Application {
 
     public static void main(String[] args) {

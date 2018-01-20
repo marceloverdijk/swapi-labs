@@ -17,12 +17,14 @@
 package com.github.marceloverdijk.swapi.labs.repository;
 
 import com.github.marceloverdijk.swapi.labs.model.Vehicle;
+import org.springframework.stereotype.Repository;
 
 /**
  * The {@link Vehicle} repository.
  *
  * @author Marcel Overdijk
  */
+@Repository
 public interface VehicleRepository extends BaseRepository<Vehicle, Long> {
 
 }

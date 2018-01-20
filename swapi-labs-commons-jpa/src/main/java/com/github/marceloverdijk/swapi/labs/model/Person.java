@@ -24,6 +24,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.List;
@@ -59,22 +61,38 @@ public class Person extends BaseModel<Long> {
     private String birthYear;
 
     @Column(name = "gender")
-    private String gender; // TODO enum?
+    private String gender;
 
     @ManyToOne
     @JoinColumn(name = "homeworld")
     private Planet homeworld;
 
-    // TODO
+    @ManyToMany
+    @JoinTable(
+            name = "film_character",
+            joinColumns = @JoinColumn(name = "person_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "film_id", referencedColumnName = "id"))
     private List<Film> films;
 
-    // TODO
+    @ManyToMany
+    @JoinTable(
+            name = "species_person",
+            joinColumns = @JoinColumn(name = "person_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "species_id", referencedColumnName = "id"))
     private List<Species> species;
 
-    // TODO
+    @ManyToMany
+    @JoinTable(
+            name = "vehicle_pilot",
+            joinColumns = @JoinColumn(name = "person_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "vehicle_id", referencedColumnName = "id"))
     private List<Vehicle> vehicles;
 
-    // TODO
+    @ManyToMany
+    @JoinTable(
+            name = "starship_pilot",
+            joinColumns = @JoinColumn(name = "person_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "starship_id", referencedColumnName = "id"))
     private List<Starship> starships;
 
     public String getName() {

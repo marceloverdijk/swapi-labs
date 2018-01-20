@@ -23,6 +23,9 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.List;
@@ -54,19 +57,39 @@ public class Film extends BaseModel<Long> {
     @Column(name = "release_date")
     private LocalDate releaseDate;
 
-    // TODO
+    @ManyToMany
+    @JoinTable(
+            name = "film_character",
+            joinColumns = @JoinColumn(name = "film_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "person_id", referencedColumnName = "id"))
     private List<Person> characters;
 
-    // TODO
+    @ManyToMany
+    @JoinTable(
+            name = "film_planet",
+            joinColumns = @JoinColumn(name = "film_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "planet_id", referencedColumnName = "id"))
     private List<Planet> planets;
 
-    // TODO
+    @ManyToMany
+    @JoinTable(
+            name = "film_starship",
+            joinColumns = @JoinColumn(name = "film_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "starship_id", referencedColumnName = "id"))
     private List<Starship> starships;
 
-    // TODO
+    @ManyToMany
+    @JoinTable(
+            name = "film_vehicle",
+            joinColumns = @JoinColumn(name = "film_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "vehicle_id", referencedColumnName = "id"))
     private List<Vehicle> vehicles;
 
-    // TODO
+    @ManyToMany
+    @JoinTable(
+            name = "film_species",
+            joinColumns = @JoinColumn(name = "film_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "species_id", referencedColumnName = "id"))
     private List<Species> species;
 
     public String getTitle() {

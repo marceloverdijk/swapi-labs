@@ -2,24 +2,68 @@ type Query {
 
     version: String!
 
+    persons(page: Int = 1, size: Int = 10): [Person]!
+    person(planetId: ID!): Person
+
     planets(page: Int = 1, size: Int = 10): [Planet]!
     planet(planetId: ID!): Planet
 }
 
 scalar Date
 scalar DateTime
+scalar Long
+
+type Person {
+    id: ID!
+    name: String!
+    height: Int
+    mass: Float
+    hairColor: String
+    skinColor: String
+    eyeColor: String
+    birthYear: String
+    gender: String
+    homeworld: Planet
+    created: DateTime!
+    edited: DateTime!
+}
 
 type Planet {
     id: ID!
     name: String!
-    rotationPeriod: String!
-    orbitalPeriod: String!
-    diameter: String!
-    climate: String!
-    gravity: String!
-    terrain: String!
-    surfaceWater: String!
-    population: String!
+    rotationPeriod: Int
+    orbitalPeriod: Int
+    diameter: Int
+    climate: String
+    gravity: String
+    terrain: String
+    surfaceWater: Int
+    population: Long
+    residents: [Person]!
+    created: DateTime!
+    edited: DateTime!
+}
+
+type Film {
+    id: ID!
+    created: DateTime!
+    edited: DateTime!
+}
+
+type Species {
+    id: ID!
+    created: DateTime!
+    edited: DateTime!
+}
+
+type Vehicle {
+    id: ID!
+    created: DateTime!
+    edited: DateTime!
+}
+
+type Starship {
+    id: ID!
     created: DateTime!
     edited: DateTime!
 }

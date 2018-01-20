@@ -21,10 +21,13 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import javax.persistence.AssociationOverride;
+import javax.persistence.AssociationOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Table;
-import java.util.List;
 
 /**
  * Represents a vehicle.
@@ -32,127 +35,24 @@ import java.util.List;
  * @author Marcel Overdijk
  */
 @Entity
-@Table(name = "person")
-public class Vehicle extends BaseModel<Long> { // TODO create Transport class
-
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "model")
-    private String model;
-
-    @Column(name = "manufacturer")
-    private String manufacturer;
-
-    @Column(name = "cost_in_credits")
-    private Long costInCredits;
-
-    @Column(name = "length")
-    private Integer length;
-
-    @Column(name = "max_atmosphering_speed")
-    private Integer maxAtmospheringSpeed;
-
-    @Column(name = "crew")
-    private Integer crew;
-
-    @Column(name = "passengers")
-    private Integer passengers;
-
-    @Column(name = "cargo_capacity")
-    private Long cargoCapacity;
-
-    @Column(name = "consumables")
-    private String consumables;
+@Table(name = "vehicle")
+@AssociationOverrides({
+        @AssociationOverride(
+                name = "pilots",
+                joinTable = @JoinTable(
+                        name = "vehicle_pilot",
+                        joinColumns = @JoinColumn(name = "vehicle_id", referencedColumnName = "id"),
+                        inverseJoinColumns = @JoinColumn(name = "person_id", referencedColumnName = "id"))),
+        @AssociationOverride(
+                name = "films",
+                joinTable = @JoinTable(
+                        name = "film_vehicle",
+                        joinColumns = @JoinColumn(name = "vehicle_id", referencedColumnName = "id"),
+                        inverseJoinColumns = @JoinColumn(name = "film_id", referencedColumnName = "id")))})
+public class Vehicle extends Transport<Long> {
 
     @Column(name = "vehicle_class")
     private String vehicleClass;
-
-    // TODO
-    private List<Person> pilots;
-
-    // TODO
-    private List<Film> films;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(final String model) {
-        this.model = model;
-    }
-
-    public String getManufacturer() {
-        return manufacturer;
-    }
-
-    public void setManufacturer(final String manufacturer) {
-        this.manufacturer = manufacturer;
-    }
-
-    public Long getCostInCredits() {
-        return costInCredits;
-    }
-
-    public void setCostInCredits(final Long costInCredits) {
-        this.costInCredits = costInCredits;
-    }
-
-    public Integer getLength() {
-        return length;
-    }
-
-    public void setLength(final Integer length) {
-        this.length = length;
-    }
-
-    public Integer getMaxAtmospheringSpeed() {
-        return maxAtmospheringSpeed;
-    }
-
-    public void setMaxAtmospheringSpeed(final Integer maxAtmospheringSpeed) {
-        this.maxAtmospheringSpeed = maxAtmospheringSpeed;
-    }
-
-    public Integer getCrew() {
-        return crew;
-    }
-
-    public void setCrew(final Integer crew) {
-        this.crew = crew;
-    }
-
-    public Integer getPassengers() {
-        return passengers;
-    }
-
-    public void setPassengers(final Integer passengers) {
-        this.passengers = passengers;
-    }
-
-    public Long getCargoCapacity() {
-        return cargoCapacity;
-    }
-
-    public void setCargoCapacity(final Long cargoCapacity) {
-        this.cargoCapacity = cargoCapacity;
-    }
-
-    public String getConsumables() {
-        return consumables;
-    }
-
-    public void setConsumables(final String consumables) {
-        this.consumables = consumables;
-    }
 
     public String getVehicleClass() {
         return vehicleClass;
@@ -160,22 +60,6 @@ public class Vehicle extends BaseModel<Long> { // TODO create Transport class
 
     public void setVehicleClass(final String vehicleClass) {
         this.vehicleClass = vehicleClass;
-    }
-
-    public List<Person> getPilots() {
-        return pilots;
-    }
-
-    public void setPilots(final List<Person> pilots) {
-        this.pilots = pilots;
-    }
-
-    public List<Film> getFilms() {
-        return films;
-    }
-
-    public void setFilms(final List<Film> films) {
-        this.films = films;
     }
 
     @Override

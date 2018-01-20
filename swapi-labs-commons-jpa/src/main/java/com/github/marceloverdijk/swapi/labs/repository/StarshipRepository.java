@@ -17,12 +17,14 @@
 package com.github.marceloverdijk.swapi.labs.repository;
 
 import com.github.marceloverdijk.swapi.labs.model.Starship;
+import org.springframework.stereotype.Repository;
 
 /**
  * The {@link Starship} repository.
  *
  * @author Marcel Overdijk
  */
+@Repository
 public interface StarshipRepository extends BaseRepository<Starship, Long> {
 
 }

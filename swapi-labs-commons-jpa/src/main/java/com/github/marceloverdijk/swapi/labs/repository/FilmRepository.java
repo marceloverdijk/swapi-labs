@@ -17,12 +17,14 @@
 package com.github.marceloverdijk.swapi.labs.repository;
 
 import com.github.marceloverdijk.swapi.labs.model.Film;
+import org.springframework.stereotype.Repository;
 
 /**
  * The {@link Film} repository.
  *
  * @author Marcel Overdijk
  */
+@Repository
 public interface FilmRepository extends BaseRepository<Film, Long> {
 
 }

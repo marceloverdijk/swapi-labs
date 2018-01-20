@@ -17,12 +17,14 @@
 package com.github.marceloverdijk.swapi.labs.repository;
 
 import com.github.marceloverdijk.swapi.labs.model.Planet;
+import org.springframework.stereotype.Repository;
 
 /**
  * The {@link Planet} repository.
  *
  * @author Marcel Overdijk
  */
+@Repository
 public interface PlanetRepository extends BaseRepository<Planet, Long> {
 
 }

@@ -17,12 +17,14 @@
 package com.github.marceloverdijk.swapi.labs.repository;
 
 import com.github.marceloverdijk.swapi.labs.model.Species;
+import org.springframework.stereotype.Repository;
 
 /**
  * The {@link Species} repository.
  *
  * @author Marcel Overdijk
  */
+@Repository
 public interface SpeciesRepository extends BaseRepository<Species, Long> {
 
 }
