@@ -8,17 +8,23 @@ Some sample applications based on the Star Wars API (https://swapi.co/).
 ### `swapi-labs-graphql`
 
 Sample application providing a [GraphQL](http://graphql.org/) web service.
+
 Run the sample with:
 
     ./gradlew clean :swapi-labs-graphql:bootRun
+
+The GraphiQL interactive interface is available at `http://localhost:8080/graphiql`.
 
 
 ### `swapi-labs-jsonapi`
 
 Sample application providing a RESTful web service following the [JSON API](http://jsonapi.org/) specification. 
+
 Run the sample with:
 
     ./gradlew clean :swapi-labs-jsonapi:bootRun
+
+Note: development not yet started. 
 
 
 ## Refreshing SWAPI data
