@@ -4,6 +4,7 @@ buildscript {
         graphqlJavaToolsVersion          = "4.3.0"
         graphqlSpringBootStarterVersion  = "4.0.0.M1"
         graphiqlSpringBootStarterVersion = "3.10.0"
+        jsonapiConverterVersion          = "0.8"
         querydslPluginVersion            = "1.0.9"
         springBootVersion                = "2.0.0.BUILD-SNAPSHOT"
     }
@@ -115,6 +116,7 @@ project("swapi-labs-jsonapi") {
     dependencies {
         compile project(":swapi-labs-commons-jpa")
         compile project(":swapi-labs-data")
+        compile("com.github.jasminb:jsonapi-converter:${jsonapiConverterVersion}")
         compile("com.querydsl:querydsl-jpa")
         compile("org.springframework.boot:spring-boot-starter-actuator")
         compile("org.springframework.boot:spring-boot-starter-aop")
