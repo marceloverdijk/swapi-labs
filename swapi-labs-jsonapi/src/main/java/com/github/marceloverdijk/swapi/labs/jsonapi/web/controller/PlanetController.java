@@ -65,6 +65,8 @@ public class PlanetController extends BaseController {
         List<Planet> planets = page.getContent();
         List<PlanetResource> resources = planetResourceAssembler.toResources(planets);
         JSONAPIDocument<List<PlanetResource>> document = new JSONAPIDocument<>(resources);
+        // TODO add paging links
+        // TODO add paging meta data
         return document;
     }
 

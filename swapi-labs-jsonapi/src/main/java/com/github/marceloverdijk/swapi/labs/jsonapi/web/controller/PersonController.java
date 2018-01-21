@@ -65,6 +65,8 @@ public class PersonController extends BaseController {
         List<Person> persons = page.getContent();
         List<PersonResource> resources = personResourceAssembler.toResources(persons);
         JSONAPIDocument<List<PersonResource>> document = new JSONAPIDocument<>(resources);
+        // TODO add paging links
+        // TODO add paging meta data
         return document;
     }
 

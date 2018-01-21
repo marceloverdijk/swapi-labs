@@ -50,6 +50,7 @@ public class PersonResourceAssembler extends BaseResourceAssembler<Person, Perso
         resource.setBirthYear(person.getBirthYear());
         resource.setGender(person.getGender());
         resource.setHomeworld(planetResourceAssembler.toResource(person.getHomeworld()));
+        // TODO add resource links
         return resource;
     }
 }

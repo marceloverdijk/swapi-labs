@@ -42,6 +42,7 @@ public class PlanetResourceAssembler extends BaseResourceAssembler<Planet, Plane
         resource.setTerrain(planet.getTerrain());
         resource.setSurfaceWater(planet.getSurfaceWater());
         resource.setPopulation(planet.getPopulation());
+        // TODO add resource links
         return resource;
     }
 }
