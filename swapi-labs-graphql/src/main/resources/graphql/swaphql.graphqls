@@ -1,136 +1,334 @@
+# The query root.
 type Query {
 
+    # Returns the version.
     version: String!
 
+    # Returns a page of persons.
     persons(page: Int = 1, size: Int = 10): [Person]!
+
+    # Lookup a person by id.
     person(personId: ID!): Person
 
+    # Returns a page of planets.
     planets(page: Int = 1, size: Int = 10): [Planet]!
+
+    # Lookup a pplanet by id.
     planet(planetId: ID!): Planet
 
+    # Returns a page of films.
     films(page: Int = 1, size: Int = 10): [Film]!
+
+    # Lookup a film by id.
     film(filmId: ID!): Film
 
+    # Returns a page of species.
     species(page: Int = 1, size: Int = 10): [Species]!
+
+    #
+    # TODO what should be a proper name for this query method?
+    #
+    # Lookup a species by id.
     getSpeciesById(speciesId: ID!): Species
 
+    # Returns a page of vehicles.
     vehicles(page: Int = 1, size: Int = 10): [Vehicle]!
+
+    # Lookup a vehicle by id.
     vehicle(vehicleId: ID!): Vehicle
 
+    # Returns a page of starships.
     starships(page: Int = 1, size: Int = 10): [Starship]!
+
+    # Lookup a starship by id.
     starship(starshipId: ID!): Starship
 }
 
+# The Date scalar.
 scalar Date
-scalar DateTime
+
+# The Long scalar.
 scalar Long
 
+# Represents a person.
 type Person {
+
+    # The unique ID of the person.
     id: ID!
+
+    # The name of the person.
     name: String!
+
+    # The height of the person in centimeters.
     height: Int
+
+    # The mass of the person in kilograms
     mass: Float
+
+    # The hair color of the person.
     hairColor: String
+
+    # The skin color of the person.
     skinColor: String
+
+    # The eye color of the person.
     eyeColor: String
+
+    # The birth year of the person.
     birthYear: String
+
+    # The gender of the person.
     gender: String
+
+    # The homeworld of the person, the planet that the person was born on or inhabits.
     homeworld: Planet
+
+    # The films that the person has been in.
     films: [Film]!
+
+    # The species that the person belongs to.
     species: [Species]!
+
+    # The vehicles that the person has piloted.
     vehicles: [Vehicle]!
+
+    # The starships that the person has piloted.
     starships: [Starship]!
-    created: DateTime!
-    edited: DateTime!
 }
 
+# Represents a planet.
 type Planet {
+
+    # The unique ID of the planet.
     id: ID!
+
+    # The name of the planet.
     name: String!
+
+    # The rotation period of the planet.
+    # The number of standard hours it takes for this planet to complete a single rotation on its axis.
     rotationPeriod: Int
+
+    # The orbital period of the planet.
+    # The number of standard days it takes for this planet to complete a single orbit of its local star.
     orbitalPeriod: Int
+
+    # The diameter of the planet in kilometers.
     diameter: Int
+
+    # The climate of the planet. Comma separated if diverse.
     climate: String
+
+    # The gravity of the planet.
     gravity: String
+
+    # The terrain of the planet. Comma separated if diverse.
     terrain: String
+
+    # The surface water of the planet.
+    # The percentage of the planet surface that is naturally occurring water or bodies of water.
     surfaceWater: Int
+
+    # The average population of sentient beings inhabiting the planet.
     population: Long
+
+    # The residents that live on the planet.
     residents: [Person]!
-    created: DateTime!
-    edited: DateTime!
 }
 
+# Represents a film.
 type Film {
+
+    # The unique ID of the film.
     id: ID!
+
+    # The title of the film.
     title: String!
+
+    # The episode number of the film.
     episodeId: Int!
+
+    # The opening crawl of the film.
     openingCrawl: String
+
+    # The director of the film.
     director: String
+
+    # The producer of the film.
     producer: String
+
+    # The release date of the film.
     releaseDate: Date
+
+    # The characters that are in the film.
     characters: [Person]!
+
+    # The planets that are in the film.
     planets: [Planet]!
+
+    # The starships that are in the film.
     starships: [Starship]!
+
+    # The vehicles that are in the film.
     vehicles: [Vehicle]!
+
+    # The species that are in the film.
     species: [Species]!
-    created: DateTime!
-    edited: DateTime!
 }
 
+# Represents a species.
 type Species {
+
+    # The unique ID of the film.
     id: ID!
+
+    # The name of the species
     name: String!
+
+    # The classification of the species, such as "mammal" or "reptile".
     classification: String
+
+    # The designation of the species, such as "sentient".
     designation: String
+
+    # The average height of the species in centimeters.
     averageHeight: Int
+
+    # The skin colors of the species.
+    # A comma-separated string of common skin colors for this species.
     skinColors: String
+
+    # The hair colors of the species.
+    # A comma-separated string of common hair colors for this species.
     hairColors: String
+
+    # The eye colors of the species.
+    # A comma-separated string of common eye colors for this species.
     eyeColors: String
+
+    # The verage lifespan of the species in years.
     averageLifespan: Int
+
+    # The homeworld of the species, the planet that the species originates from.
     homeworld: Planet
+
+    # The language commonly spoken by the species.
     language: String
+
+    # The persons that are part of the species.
     persons: [Person]!
+
+    # The films that the species has been in.
     films: [Film]!
-    created: DateTime!
-    edited: DateTime!
 }
 
+# Represents a vehicle.
 type Vehicle {
+
+    # The unique ID of the vehicle.
     id: ID!
+
+    # The name of the vehicle.
+    # The common name, such as "Sand Crawler" or "Speeder bike".
     name: String!
+
+    # The model of the vehicle.
+    # The model or official name of this vehicle, such as "All-Terrain Attack Transport".
     model: String
+
+    # The manufacturer of the vehicle. Comma separated if more than one.
     manufacturer: String
+
+    # The cost of the vehicle new, in Galactic Credits.
     costInCredits: Long
+
+    # The length of the vehicle in meters.
     length: Int
+
+    # The maximum speed of the vehicle in the atmosphere.
     maxAtmospheringSpeed: Int
+
+    # The number of crew members of the vehicle.
+    # The number of personnel needed to run or pilot this vehicle.
     crew: Int
+
+    # The number of passengers of the vehicle.
+    # The number of non-essential people this vehicle can transport.
     passengers: Int
+
+    # The cargo capacity of the vehicle in kilograms.
     cargoCapacity: Long
+
+    # The consumables of the vehicle.
+    # The maximum length of time that the vehicle can provide consumables for its entire crew without having to resupply.
     consumables: String
+
+    # The class of the vehicle, such as "Wheeled" or "Repulsorcraft".
     vehicleClass: String
+
+    # The pilots that the vehicle has been piloted by.
     pilots: [Person]!
+
+    # The films that the vehicle has appeared in.
     films: [Film]!
-    created: DateTime!
-    edited: DateTime!
 }
 
+# Represents a starship.
 type Starship {
+
+    # The unique ID of the starship.
     id: ID!
+
+    # The name of the starship.
+    # The common name, such as "Death Star".
     name: String!
+
+    # The model of the starship.
+    # The model or official name of this starship, such as "T-65 X-wing" or "DS-1 Orbital Battle Station".
     model: String
+
+    # The manufacturer of the vehicle. Comma separated if more than one.
     manufacturer: String
+
+    # The cost of the starship new, in Galactic Credits.
     costInCredits: Long
+
+    # The length of the starship in meters.
     length: Int
+
+    # The maximum speed of the starship in the atmosphere.
     maxAtmospheringSpeed: Int
+
+    # The number of crew members of the starship.
+    # The number of personnel needed to run or pilot this starship.
     crew: Int
+
+    # The number of passengers of the starship.
+    # The number of non-essential people this starship can transport.
     passengers: Int
+
+    # The cargo capacity of the starship in kilograms.
     cargoCapacity: Long
+
+    # The consumables of the starship.
+    # The maximum length of time that the starship can provide consumables for its entire crew without having to resupply.
     consumables: String
+
+    # The hyperdrive rating of the starship.
     hyperdriveRating: Float
+
+    # The Maximum number of Megalights this starship can travel in a standard hour.
+    # A "Megalight" is a standard unit of distance and has never been defined before within the Star Wars universe.
+    # This figure is only really useful for measuring the difference in speed of starships.
+    # We can assume it is similar to AU, the distance between our Sun (Sol) and Earth.
     MGLT: Int
+
+    # The class of the starship, such as "Starfighter" or "Deep Space Mobile Battlestation"
     starshipClass: String
+
+    # The pilots that the starship has been piloted by.
     pilots: [Person]!
+
+    # The films that the starship has appeared in.
     films: [Film]!
-    created: DateTime!
-    edited: DateTime!
 }
