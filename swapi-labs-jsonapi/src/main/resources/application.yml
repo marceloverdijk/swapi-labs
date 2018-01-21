@@ -1,6 +1,15 @@
 spring:
   datasource:
     name: swapidb
+  data:
+    web:
+      pageable:
+        default-page-size: 10
+        max-page-size: 100
+        one-indexed-parameters: true
+  jackson:
+    date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+    property-naming-strategy: CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES
   jpa:
     hibernate.ddl-auto: none
     show-sql: true

@@ -16,12 +16,19 @@
 
 package com.github.marceloverdijk.swapi.labs.jsonapi;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.jasminb.jsonapi.ResourceConverter;
+import com.github.marceloverdijk.swapi.labs.jsonapi.web.resource.PlanetResource;
+import com.github.marceloverdijk.swapi.labs.jsonapi.web.resource.Resource;
 import com.github.marceloverdijk.swapi.labs.model.BaseModel;
 import com.github.marceloverdijk.swapi.labs.repository.BaseRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+import java.util.List;
 
 /**
  * The main application class.
@@ -35,5 +42,11 @@ public class Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
+    }
+
+    @Bean
+    public ResourceConverter resourceConverter(final ObjectMapper mapper) {
+        // Do classpath scanning? https://github.com/jasminb/jsonapi-converter/issues/131
+        return new ResourceConverter(mapper, PlanetResource.class);
     }
 }

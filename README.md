@@ -28,8 +28,6 @@ Run the sample with:
 
 The sample uses [Spring Boot][], [Spring Data JPA][] and the [JSON API Converter][] library. 
 
-Note: development not yet started. 
-
 
 ## Refreshing SWAPI data
 
