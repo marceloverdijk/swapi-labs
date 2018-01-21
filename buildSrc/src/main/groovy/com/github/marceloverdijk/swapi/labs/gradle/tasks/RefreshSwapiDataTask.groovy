@@ -318,14 +318,10 @@ class SwapiDataExporter implements Exporter {
         }
     }
 
-    def isNotUnknown(s) {
-        return !("unknown".equalsIgnoreCase(s) || "n/a".equalsIgnoreCase(s))
-    }
-
     def writeStringValue(value) {
         def result = "NULL"
         if (value) {
-            if (!["unknown", "n/a"].contains(value)) {
+            if (!["unknown", "none", "n/a"].contains(value)) {
                 result = value.replaceAll (/'/,/''/) // Escape quotes (by doubling them).
                 result = "'${result}'" // Quote the string value.
             }

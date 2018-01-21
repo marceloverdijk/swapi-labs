@@ -16,10 +16,6 @@
 
 package com.github.marceloverdijk.swapi.labs.jsonapi.web.resource;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
 /**
  * Interface for components that convert a domain type into a {@link Resource}.
  *
@@ -34,20 +30,4 @@ public interface ResourceAssembler<T, D extends Resource> {
      * @return the resource
      */
     D toResource(T entity);
-
-    /**
-     * Converts all given entities into {@link Resource}s.
-     *
-     * @see #toResource(Object)
-     * @param entities the entities, must not be {@literal null}.
-     * @return the resources
-     */
-    default List<D> toResources(Iterable<? extends T> entities) {
-        Objects.requireNonNull(entities, "'entities' must not be null");
-        List<D> result = new ArrayList<>();
-        for (T entity : entities) {
-            result.add(toResource(entity));
-        }
-        return result;
-    }
 }

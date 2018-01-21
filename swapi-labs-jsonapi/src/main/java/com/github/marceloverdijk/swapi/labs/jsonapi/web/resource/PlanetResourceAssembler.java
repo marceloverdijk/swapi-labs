@@ -17,11 +17,9 @@
 package com.github.marceloverdijk.swapi.labs.jsonapi.web.resource;
 
 import com.github.marceloverdijk.swapi.labs.model.Planet;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.stereotype.Component;
+
+import java.util.Objects;
 
 /**
  * The planet resource assembler.
@@ -29,14 +27,21 @@ import org.springframework.stereotype.Component;
  * @author Marcel Overdijk
  */
 @Component
-public class PlanetResourceAssembler implements ResourceAssembler<Planet, PlanetResource> {
+public class PlanetResourceAssembler extends BaseResourceAssembler<Planet, PlanetResource> {
 
     @Override
-    public PlanetResource toResource(final Planet planet) {
+    protected PlanetResource toResourceInternal(final Planet planet) {
         PlanetResource resource = new PlanetResource();
-        resource.setId(planet.getId() != null ? planet.getId().toString() : null);
+        resource.setId(Objects.toString(planet.getId(), null));
         resource.setName(planet.getName());
-        // TODO
+        resource.setRotationPeriod(planet.getRotationPeriod());
+        resource.setOrbitalPeriod(planet.getOrbitalPeriod());
+        resource.setDiameter(planet.getDiameter());
+        resource.setClimate(planet.getClimate());
+        resource.setGravity(planet.getGravity());
+        resource.setTerrain(planet.getTerrain());
+        resource.setSurfaceWater(planet.getSurfaceWater());
+        resource.setPopulation(planet.getPopulation());
         return resource;
     }
 }

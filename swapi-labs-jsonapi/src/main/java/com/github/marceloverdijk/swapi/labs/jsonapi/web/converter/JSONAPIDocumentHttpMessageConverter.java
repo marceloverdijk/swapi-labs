@@ -43,12 +43,12 @@ import static com.github.marceloverdijk.swapi.labs.jsonapi.web.MediaTypes.APPLIC
 @Component
 public class JSONAPIDocumentHttpMessageConverter extends AbstractGenericHttpMessageConverter<JSONAPIDocument> {
 
-    private final ResourceConverter resourceConverter;
+    private final ResourceConverter converter;
 
     @Autowired
-    public JSONAPIDocumentHttpMessageConverter(final ResourceConverter resourceConverter) {
+    public JSONAPIDocumentHttpMessageConverter(final ResourceConverter converter) {
         super(APPLICATION_VND_API_JSON);
-        this.resourceConverter = Objects.requireNonNull(resourceConverter, "'resourceConverter' must not be null");
+        this.converter = Objects.requireNonNull(converter, "'converter' must not be null");
     }
 
     @Override
@@ -75,9 +75,9 @@ public class JSONAPIDocumentHttpMessageConverter extends AbstractGenericHttpMess
             Object resource = jsonapiDocument.get();
             byte[] message;
             if (resource != null && Iterable.class.isAssignableFrom(resource.getClass())) {
-                message = resourceConverter.writeDocumentCollection((JSONAPIDocument<? extends Iterable<?>>) jsonapiDocument);
+                message = converter.writeDocumentCollection((JSONAPIDocument<? extends Iterable<?>>) jsonapiDocument);
             } else {
-                message = resourceConverter.writeDocument(jsonapiDocument);
+                message = converter.writeDocument(jsonapiDocument);
             }
             outputMessage.getBody().write(message);
         } catch (DocumentSerializationException e) {

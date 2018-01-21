@@ -18,8 +18,9 @@ package com.github.marceloverdijk.swapi.labs.jsonapi;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jasminb.jsonapi.ResourceConverter;
+import com.github.jasminb.jsonapi.SerializationFeature;
+import com.github.marceloverdijk.swapi.labs.jsonapi.web.resource.PersonResource;
 import com.github.marceloverdijk.swapi.labs.jsonapi.web.resource.PlanetResource;
-import com.github.marceloverdijk.swapi.labs.jsonapi.web.resource.Resource;
 import com.github.marceloverdijk.swapi.labs.model.BaseModel;
 import com.github.marceloverdijk.swapi.labs.repository.BaseRepository;
 import org.springframework.boot.SpringApplication;
@@ -27,8 +28,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-
-import java.util.List;
 
 /**
  * The main application class.
@@ -47,6 +46,12 @@ public class Application {
     @Bean
     public ResourceConverter resourceConverter(final ObjectMapper mapper) {
         // Do classpath scanning? https://github.com/jasminb/jsonapi-converter/issues/131
-        return new ResourceConverter(mapper, PlanetResource.class);
+        Class<?>[] classes = new Class[] {
+                PersonResource.class,
+                PlanetResource.class
+        };
+        ResourceConverter converter = new ResourceConverter(mapper, classes);
+        converter.enableSerializationOption(SerializationFeature.INCLUDE_RELATIONSHIP_ATTRIBUTES);
+        return converter;
     }
 }

@@ -16,6 +16,7 @@
 
 package com.github.marceloverdijk.swapi.labs.jsonapi.web.resource;
 
+import com.github.jasminb.jsonapi.annotations.Relationship;
 import com.github.jasminb.jsonapi.annotations.Type;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -23,22 +24,24 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * The planet resource.
+ * The person resource.
  *
  * @author Marcel Overdijk
  */
-@Type("planet")
-public class PlanetResource extends BaseResource {
+@Type("person")
+public class PersonResource extends BaseResource {
 
     private String name;
-    private Integer rotationPeriod;
-    private Integer orbitalPeriod;
-    private Integer diameter;
-    private String climate;
-    private String gravity;
-    private String terrain;
-    private Integer surfaceWater;
-    private Long population;
+    private Integer height;
+    private Double mass;
+    private String hairColor;
+    private String skinColor;
+    private String eyeColor;
+    private String birthYear;
+    private String gender;
+
+    @Relationship("homeworld")
+    private PlanetResource homeworld;
 
     public String getName() {
         return name;
@@ -48,68 +51,68 @@ public class PlanetResource extends BaseResource {
         this.name = name;
     }
 
-    public Integer getRotationPeriod() {
-        return rotationPeriod;
+    public Integer getHeight() {
+        return height;
     }
 
-    public void setRotationPeriod(final Integer rotationPeriod) {
-        this.rotationPeriod = rotationPeriod;
+    public void setHeight(final Integer height) {
+        this.height = height;
     }
 
-    public Integer getOrbitalPeriod() {
-        return orbitalPeriod;
+    public Double getMass() {
+        return mass;
     }
 
-    public void setOrbitalPeriod(final Integer orbitalPeriod) {
-        this.orbitalPeriod = orbitalPeriod;
+    public void setMass(final Double mass) {
+        this.mass = mass;
     }
 
-    public Integer getDiameter() {
-        return diameter;
+    public String getHairColor() {
+        return hairColor;
     }
 
-    public void setDiameter(final Integer diameter) {
-        this.diameter = diameter;
+    public void setHairColor(final String hairColor) {
+        this.hairColor = hairColor;
     }
 
-    public String getClimate() {
-        return climate;
+    public String getSkinColor() {
+        return skinColor;
     }
 
-    public void setClimate(final String climate) {
-        this.climate = climate;
+    public void setSkinColor(final String skinColor) {
+        this.skinColor = skinColor;
     }
 
-    public String getGravity() {
-        return gravity;
+    public String getEyeColor() {
+        return eyeColor;
     }
 
-    public void setGravity(final String gravity) {
-        this.gravity = gravity;
+    public void setEyeColor(final String eyeColor) {
+        this.eyeColor = eyeColor;
     }
 
-    public String getTerrain() {
-        return terrain;
+    public String getBirthYear() {
+        return birthYear;
     }
 
-    public void setTerrain(final String terrain) {
-        this.terrain = terrain;
+    public void setBirthYear(final String birthYear) {
+        this.birthYear = birthYear;
     }
 
-    public Integer getSurfaceWater() {
-        return surfaceWater;
+    public String getGender() {
+        return gender;
     }
 
-    public void setSurfaceWater(final Integer surfaceWater) {
-        this.surfaceWater = surfaceWater;
+    public void setGender(final String gender) {
+        this.gender = gender;
     }
 
-    public Long getPopulation() {
-        return population;
+    public PlanetResource getHomeworld() {
+        return homeworld;
     }
 
-    public void setPopulation(final Long population) {
-        this.population = population;
+    public void setHomeworld(final PlanetResource homeworld) {
+        this.homeworld = homeworld;
     }
 
     @Override
