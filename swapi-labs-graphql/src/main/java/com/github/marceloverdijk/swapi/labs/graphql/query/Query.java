@@ -74,7 +74,7 @@ public class Query implements GraphQLQueryResolver {
         return "1.0";
     }
 
-    public List<Person> persons(Integer page, Integer size) {
+    public List<Person> allPersons(Integer page, Integer size) {
         LOGGER.info("persons called");
         Pageable pageable = PageRequest.of(page - 1, size, Sort.Direction.ASC, "name");
         List<Person> persons = personRepository.findAll(pageable).getContent();
@@ -87,7 +87,7 @@ public class Query implements GraphQLQueryResolver {
         return person;
     }
 
-    public List<Planet> planets(Integer page, Integer size) {
+    public List<Planet> allPlanets(Integer page, Integer size) {
         LOGGER.info("planets called");
         Pageable pageable = PageRequest.of(page - 1, size, Sort.Direction.ASC, "name");
         List<Planet> planets = planetRepository.findAll(pageable).getContent();
@@ -100,7 +100,7 @@ public class Query implements GraphQLQueryResolver {
         return planet;
     }
 
-    public List<Film> films(Integer page, Integer size) {
+    public List<Film> allFilms(Integer page, Integer size) {
         LOGGER.info("films called");
         Pageable pageable = PageRequest.of(page - 1, size, Sort.Direction.ASC, "title");
         List<Film> films = filmRepository.findAll(pageable).getContent();
@@ -113,20 +113,20 @@ public class Query implements GraphQLQueryResolver {
         return film;
     }
 
-    public List<Species> species(Integer page, Integer size) {
+    public List<Species> allSpecies(Integer page, Integer size) {
         LOGGER.info("species called");
         Pageable pageable = PageRequest.of(page - 1, size, Sort.Direction.ASC, "name");
         List<Species> species = speciesRepository.findAll(pageable).getContent();
         return species;
     }
 
-    public Species getSpeciesById(Long speciesId) {
+    public Species species(Long speciesId) {
         LOGGER.info("species [{}] called", speciesId);
         Species species = speciesRepository.findById(speciesId).orElse(null);
         return species;
     }
 
-    public List<Vehicle> vehicles(Integer page, Integer size) {
+    public List<Vehicle> allVehicles(Integer page, Integer size) {
         LOGGER.info("vehicles called");
         Pageable pageable = PageRequest.of(page - 1, size, Sort.Direction.ASC, "name");
         List<Vehicle> vehicles = vehicleRepository.findAll(pageable).getContent();
@@ -139,7 +139,7 @@ public class Query implements GraphQLQueryResolver {
         return vehicle;
     }
 
-    public List<Starship> starships(Integer page, Integer size) {
+    public List<Starship> allStarships(Integer page, Integer size) {
         LOGGER.info("starships called");
         Pageable pageable = PageRequest.of(page - 1, size, Sort.Direction.ASC, "name");
         List<Starship> starships = starshipRepository.findAll(pageable).getContent();

@@ -5,40 +5,37 @@ type Query {
     version: String!
 
     # Returns a page of persons.
-    persons(page: Int = 1, size: Int = 10): [Person]!
+    allPersons(page: Int = 1, size: Int = 10): [Person]!
 
     # Lookup a person by id.
     person(personId: ID!): Person
 
     # Returns a page of planets.
-    planets(page: Int = 1, size: Int = 10): [Planet]!
+    allPlanets(page: Int = 1, size: Int = 10): [Planet]!
 
     # Lookup a pplanet by id.
     planet(planetId: ID!): Planet
 
     # Returns a page of films.
-    films(page: Int = 1, size: Int = 10): [Film]!
+    allFilms(page: Int = 1, size: Int = 10): [Film]!
 
     # Lookup a film by id.
     film(filmId: ID!): Film
 
     # Returns a page of species.
-    species(page: Int = 1, size: Int = 10): [Species]!
+    allSpecies(page: Int = 1, size: Int = 10): [Species]!
 
-    #
-    # TODO what should be a proper name for this query method?
-    #
     # Lookup a species by id.
-    getSpeciesById(speciesId: ID!): Species
+    species(speciesId: ID!): Species
 
     # Returns a page of vehicles.
-    vehicles(page: Int = 1, size: Int = 10): [Vehicle]!
+    allVehicles(page: Int = 1, size: Int = 10): [Vehicle]!
 
     # Lookup a vehicle by id.
     vehicle(vehicleId: ID!): Vehicle
 
     # Returns a page of starships.
-    starships(page: Int = 1, size: Int = 10): [Starship]!
+    allStarships(page: Int = 1, size: Int = 10): [Starship]!
 
     # Lookup a starship by id.
     starship(starshipId: ID!): Starship
