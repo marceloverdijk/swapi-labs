@@ -3,10 +3,22 @@ type Query {
     version: String!
 
     persons(page: Int = 1, size: Int = 10): [Person]!
-    person(planetId: ID!): Person
+    person(personId: ID!): Person
 
     planets(page: Int = 1, size: Int = 10): [Planet]!
     planet(planetId: ID!): Planet
+
+    films(page: Int = 1, size: Int = 10): [Film]!
+    film(filmId: ID!): Film
+
+    species(page: Int = 1, size: Int = 10): [Species]!
+    getSpeciesById(speciesId: ID!): Species
+
+    vehicles(page: Int = 1, size: Int = 10): [Vehicle]!
+    vehicle(vehicleId: ID!): Vehicle
+
+    # starships(page: Int = 1, size: Int = 10): [Starship]!
+    # starship(starshipId: ID!): Starship
 }
 
 scalar Date
@@ -46,24 +58,28 @@ type Planet {
 
 type Film {
     id: ID!
+    title: String!
     created: DateTime!
     edited: DateTime!
 }
 
 type Species {
     id: ID!
+    name: String!
     created: DateTime!
     edited: DateTime!
 }
 
 type Vehicle {
     id: ID!
+    name: String!
     created: DateTime!
     edited: DateTime!
 }
 
 type Starship {
     id: ID!
+    name: String!
     created: DateTime!
     edited: DateTime!
 }
