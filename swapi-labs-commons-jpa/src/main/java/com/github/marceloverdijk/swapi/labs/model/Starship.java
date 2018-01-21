@@ -49,7 +49,7 @@ import javax.persistence.Table;
                         name = "film_starship",
                         joinColumns = @JoinColumn(name = "starship_id", referencedColumnName = "id"),
                         inverseJoinColumns = @JoinColumn(name = "film_id", referencedColumnName = "id")))})
-public class Starship extends Transport<Long> {
+public class Starship extends Transport {
 
     @Column(name = "hyperdrive_rating")
     private Double hyperdriveRating;

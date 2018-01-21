@@ -52,13 +52,13 @@ public class Species extends BaseModel<Long> {
     private Integer averageHeight;
 
     @Column(name = "skin_colors")
-    private String skin_colors;
+    private String skinColors;
 
     @Column(name = "hair_colors")
-    private String hair_colors;
+    private String hairColors;
 
     @Column(name = "eye_colors")
-    private String eye_colors;
+    private String eyeColors;
 
     @Column(name = "average_lifespan")
     private Integer averageLifespan;
@@ -116,28 +116,28 @@ public class Species extends BaseModel<Long> {
         this.averageHeight = averageHeight;
     }
 
-    public String getSkin_colors() {
-        return skin_colors;
+    public String getSkinColors() {
+        return skinColors;
     }
 
-    public void setSkin_colors(final String skin_colors) {
-        this.skin_colors = skin_colors;
+    public void setSkinColors(final String skinColors) {
+        this.skinColors = skinColors;
     }
 
-    public String getHair_colors() {
-        return hair_colors;
+    public String getHairColors() {
+        return hairColors;
     }
 
-    public void setHair_colors(final String hair_colors) {
-        this.hair_colors = hair_colors;
+    public void setHairColors(final String hairColors) {
+        this.hairColors = hairColors;
     }
 
-    public String getEye_colors() {
-        return eye_colors;
+    public String getEyeColors() {
+        return eyeColors;
     }
 
-    public void setEye_colors(final String eye_colors) {
-        this.eye_colors = eye_colors;
+    public void setEyeColors(final String eyeColors) {
+        this.eyeColors = eyeColors;
     }
 
     public Integer getAverageLifespan() {

@@ -33,7 +33,7 @@ import java.util.List;
  * @author Marcel Overdijk
  */
 @MappedSuperclass
-public abstract class Transport<PK extends Serializable> extends BaseModel<PK> {
+public abstract class Transport extends BaseModel<Long> {
 
     @Column(name = "name")
     private String name;

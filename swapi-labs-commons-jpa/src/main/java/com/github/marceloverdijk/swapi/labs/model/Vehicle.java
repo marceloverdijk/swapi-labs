@@ -49,7 +49,7 @@ import javax.persistence.Table;
                         name = "film_vehicle",
                         joinColumns = @JoinColumn(name = "vehicle_id", referencedColumnName = "id"),
                         inverseJoinColumns = @JoinColumn(name = "film_id", referencedColumnName = "id")))})
-public class Vehicle extends Transport<Long> {
+public class Vehicle extends Transport {
 
     @Column(name = "vehicle_class")
     private String vehicleClass;
