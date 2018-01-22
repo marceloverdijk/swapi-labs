@@ -16,6 +16,14 @@
 
 package com.github.marceloverdijk.swapi.labs.jsonapi.web.controller;
 
+import com.github.jasminb.jsonapi.JSONAPIDocument;
+import com.github.marceloverdijk.swapi.labs.jsonapi.web.resource.Resource;
+import com.github.marceloverdijk.swapi.labs.jsonapi.web.resource.ResourceAssembler;
+import com.github.marceloverdijk.swapi.labs.jsonapi.web.util.JSONAPIDocumentUtils;
+import org.springframework.data.domain.Page;
+
+import java.util.List;
+
 /**
  * The base controller.
  *
@@ -23,4 +31,18 @@ package com.github.marceloverdijk.swapi.labs.jsonapi.web.controller;
  */
 public abstract class BaseController {
 
+    public <T, D extends Resource> JSONAPIDocument<D> createDocument(final T entity,
+            final ResourceAssembler<T, D> assembler) {
+        return JSONAPIDocumentUtils.createDocument(entity, assembler);
+    }
+
+    public <T, D extends Resource> JSONAPIDocument<List<D>> createCollectionDocument(final List<T> entities,
+            final ResourceAssembler<T, D> assembler) {
+        return JSONAPIDocumentUtils.createCollectionDocument(entities, assembler);
+    }
+
+    public <T, D extends Resource> JSONAPIDocument<List<D>> createPagedDocument(final Page<T> page,
+            final ResourceAssembler<T, D> assembler) {
+        return JSONAPIDocumentUtils.createPagedDocument(page, assembler);
+    }
 }

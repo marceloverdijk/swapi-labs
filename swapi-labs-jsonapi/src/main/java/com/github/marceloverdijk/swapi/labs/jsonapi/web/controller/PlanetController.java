@@ -62,12 +62,7 @@ public class PlanetController extends BaseController {
         LOGGER.info("list called");
         Page<Planet> page = planetRepository.findAll(
                 PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.Direction.ASC, "name"));
-        List<Planet> planets = page.getContent();
-        List<PlanetResource> resources = planetResourceAssembler.toResources(planets);
-        JSONAPIDocument<List<PlanetResource>> document = new JSONAPIDocument<>(resources);
-        // TODO add paging links
-        // TODO add paging meta data
-        return document;
+        return createPagedDocument(page, planetResourceAssembler);
     }
 
     @GetMapping(path = PATH_PLANET_RESOURCE_BY_ID, produces = APPLICATION_VND_API_JSON_VALUE)
@@ -75,8 +70,6 @@ public class PlanetController extends BaseController {
         LOGGER.info("get by id [{}] called", planetId);
         Planet planet = planetRepository.findById(planetId)
                 .orElseThrow(() -> new ResourceNotFoundException("Planet with id [" + planetId + "] not found"));
-        PlanetResource resource = planetResourceAssembler.toResource(planet);
-        JSONAPIDocument<PlanetResource> document = new JSONAPIDocument<>(resource);
-        return document;
+        return createDocument(planet, planetResourceAssembler);
     }
 }

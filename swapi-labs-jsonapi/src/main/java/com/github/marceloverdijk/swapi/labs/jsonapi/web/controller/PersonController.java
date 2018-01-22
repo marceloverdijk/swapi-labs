@@ -62,12 +62,7 @@ public class PersonController extends BaseController {
         LOGGER.info("list called");
         Page<Person> page = personRepository.findAll(
                 PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.Direction.ASC, "name"));
-        List<Person> persons = page.getContent();
-        List<PersonResource> resources = personResourceAssembler.toResources(persons);
-        JSONAPIDocument<List<PersonResource>> document = new JSONAPIDocument<>(resources);
-        // TODO add paging links
-        // TODO add paging meta data
-        return document;
+        return createPagedDocument(page, personResourceAssembler);
     }
 
     @GetMapping(path = PATH_PERSON_RESOURCE_BY_ID, produces = APPLICATION_VND_API_JSON_VALUE)
@@ -75,8 +70,6 @@ public class PersonController extends BaseController {
         LOGGER.info("get by id [{}] called", personId);
         Person person = personRepository.findById(personId)
                 .orElseThrow(() -> new ResourceNotFoundException("Person with id [" + personId + "] not found"));
-        PersonResource resource = personResourceAssembler.toResource(person);
-        JSONAPIDocument<PersonResource> document = new JSONAPIDocument<>(resource);
-        return document;
+        return createDocument(person, personResourceAssembler);
     }
 }

@@ -16,10 +16,18 @@
 
 package com.github.marceloverdijk.swapi.labs.jsonapi.web.resource;
 
+import com.github.jasminb.jsonapi.Link;
+import com.github.jasminb.jsonapi.Links;
 import com.github.marceloverdijk.swapi.labs.model.Planet;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+
+import static com.github.jasminb.jsonapi.JSONAPISpecConstants.SELF;
+import static com.github.marceloverdijk.swapi.labs.jsonapi.web.Paths.PATH_PLANET_RESOURCE_BY_ID;
 
 /**
  * The planet resource assembler.
@@ -42,7 +50,12 @@ public class PlanetResourceAssembler extends BaseResourceAssembler<Planet, Plane
         resource.setTerrain(planet.getTerrain());
         resource.setSurfaceWater(planet.getSurfaceWater());
         resource.setPopulation(planet.getPopulation());
-        // TODO add resource links
+
+        Map<String, Link> links = new HashMap<>();
+        links.put(SELF, new Link(ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path(PATH_PLANET_RESOURCE_BY_ID).buildAndExpand(resource.getId()).toString()));
+        resource.setLinks(new Links(links));
+
         return resource;
     }
 }

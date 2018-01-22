@@ -16,7 +16,10 @@
 
 package com.github.marceloverdijk.swapi.labs.jsonapi.web.resource;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.github.jasminb.jsonapi.Links;
 import com.github.jasminb.jsonapi.annotations.Relationship;
+import com.github.jasminb.jsonapi.annotations.RelationshipLinks;
 import com.github.jasminb.jsonapi.annotations.Type;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -42,6 +45,10 @@ public class PersonResource extends BaseResource {
 
     @Relationship("homeworld")
     private PlanetResource homeworld;
+
+    @RelationshipLinks("homeworld")
+    @JsonIgnore // TODO https://github.com/jasminb/jsonapi-converter/issues/165
+    private Links homeworldLinks;
 
     public String getName() {
         return name;
@@ -113,6 +120,14 @@ public class PersonResource extends BaseResource {
 
     public void setHomeworld(final PlanetResource homeworld) {
         this.homeworld = homeworld;
+    }
+
+    public Links getHomeworldLinks() {
+        return homeworldLinks;
+    }
+
+    public void setHomeworldLinks(final Links homeworldLinks) {
+        this.homeworldLinks = homeworldLinks;
     }
 
     @Override

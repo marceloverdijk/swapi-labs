@@ -17,17 +17,15 @@
 package com.github.marceloverdijk.swapi.labs.jsonapi.web;
 
 /**
- * Constants for paths.
+ * Constants for meta fields.
  *
  * @author Marcel Overdijk
  */
-public class Paths {
+public class MetaFields {
 
-    public static final String PATH_PERSON_RESOURCES = "/persons";
-    public static final String PATH_PERSON_RESOURCE_BY_ID = "/persons/{person-id}";
-    public static final String PATH_PLANET_RESOURCES = "/planets";
-    public static final String PATH_PLANET_RESOURCE_BY_ID = "/planets/{planet-id}";
+    public final static String REQUEST_ID = "request_id";
+    public final static String PAGE_INFO = "page_info";
 
-    private Paths() {
+    private MetaFields() {
     }
 }

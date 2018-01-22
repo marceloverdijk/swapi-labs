@@ -16,9 +16,6 @@
 
 package com.github.marceloverdijk.swapi.labs.jsonapi.web.resource;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * The base resource assembler.
  *
@@ -40,22 +37,4 @@ public abstract class BaseResourceAssembler<T, D extends Resource> implements Re
     }
 
     protected abstract D toResourceInternal(T entity);
-
-    /**
-     * Converts all given entities into {@link Resource}s.
-     *
-     * @param entities the entities, must not be {@literal null}.
-     * @return the resources
-     * @see #toResource(Object)
-     */
-    public List<D> toResources(Iterable<? extends T> entities) {
-        if (entities == null) {
-            return null;
-        }
-        List<D> result = new ArrayList<>();
-        for (T entity : entities) {
-            result.add(toResource(entity));
-        }
-        return result;
-    }
 }
