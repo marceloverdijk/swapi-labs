@@ -24,17 +24,17 @@ package com.github.marceloverdijk.swapi.labs.jsonapi.web.resource;
 public abstract class BaseResourceAssembler<T, D extends Resource> implements ResourceAssembler<T, D> {
 
     /**
-     * Converts the given entity into an {@link Resource}.
+     * Converts the given data object into an {@link Resource}.
      *
-     * @param entity the entity
+     * @param data the data object
      * @return the resource
      */
-    public D toResource(T entity) {
-        if (entity == null) {
+    public D toResource(T data) {
+        if (data == null) {
             return null;
         }
-        return toResourceInternal(entity);
+        return toResourceInternal(data);
     }
 
-    protected abstract D toResourceInternal(T entity);
+    protected abstract D toResourceInternal(T data);
 }

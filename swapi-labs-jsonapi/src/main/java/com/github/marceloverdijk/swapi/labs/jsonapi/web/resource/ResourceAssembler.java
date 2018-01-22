@@ -17,17 +17,17 @@
 package com.github.marceloverdijk.swapi.labs.jsonapi.web.resource;
 
 /**
- * Interface for components that convert a domain type into a {@link Resource}.
+ * Interface for components that convert a data object type into a {@link Resource}.
  *
  * @author Marcel Overdijk
  */
 public interface ResourceAssembler<T, D extends Resource> {
 
     /**
-     * Converts the given entity into an {@link Resource}.
+     * Converts the given data object into an {@link Resource}.
      *
-     * @param entity the entity
+     * @param data the data object
      * @return the resource
      */
-    D toResource(T entity);
+    D toResource(T data);
 }

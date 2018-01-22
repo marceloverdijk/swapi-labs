@@ -36,53 +36,69 @@ import static com.github.jasminb.jsonapi.JSONAPISpecConstants.SELF;
 import static com.github.marceloverdijk.swapi.labs.jsonapi.web.MetaFields.PAGE_INFO;
 
 /**
- * The base controller.
+ * {@link JSONAPIDocument} utils.
  *
  * @author Marcel Overdijk
  */
 public class JSONAPIDocumentUtils {
 
-    public static <T, D extends Resource> JSONAPIDocument<D> createDocument(final T entity,
+    public static <T, D extends Resource> JSONAPIDocument<D> createDocument(final T data,
             final ResourceAssembler<T, D> assembler) {
-        Objects.requireNonNull(entity, "'entity' must not be null");
+
+        Objects.requireNonNull(data, "'data' must not be null");
         Objects.requireNonNull(assembler, "'assembler' must not be null");
-        D resource = assembler.toResource(entity);
+
+        D resource = assembler.toResource(data);
+
         JSONAPIDocument<D> document = new JSONAPIDocument<>(resource);
+
         // TODO add self link?
+
         return document;
     }
 
-    public static <T, D extends Resource> JSONAPIDocument<List<D>> createCollectionDocument(final List<T> entities,
+    public static <T, D extends Resource> JSONAPIDocument<List<D>> createCollectionDocument(final List<T> data,
             final ResourceAssembler<T, D> assembler) {
-        Objects.requireNonNull(entities, "'entities' must not be null");
+
+        Objects.requireNonNull(data, "'data' must not be null");
         Objects.requireNonNull(assembler, "'assembler' must not be null");
-        List<D> resources = toResources(entities, assembler);
+
+        List<D> resources = toResources(data, assembler);
+
         JSONAPIDocument<List<D>> document = new JSONAPIDocument<>(resources);
+
         // TODO add self link?
+
         return document;
     }
 
     public static <T, D extends Resource> JSONAPIDocument<List<D>> createPagedDocument(final Page<T> page,
             final ResourceAssembler<T, D> assembler) {
+
         Objects.requireNonNull(page, "'page' must not be null");
         Objects.requireNonNull(assembler, "'assembler' must not be null");
+
         List<D> resources = toResources(page.getContent(), assembler);
-        JSONAPIDocument<List<D>> document = new JSONAPIDocument<>(resources);
+
         Map<String, Link> links = new HashMap<>();
         links.put(SELF, new Link(ServletUriComponentsBuilder.fromCurrentRequest().build().toString()));
-        document.setLinks(new Links(links));
         // TODO add next + prev links
+
         Map<String, Object> meta = new HashMap<>();
         meta.put(PAGE_INFO, new PageInfo(page));
+
+        JSONAPIDocument<List<D>> document = new JSONAPIDocument<>(resources);
+        document.setLinks(new Links(links));
         document.setMeta(meta);
+
         return document;
     }
 
-    private static <T, D extends Resource> List<D> toResources(final Collection<T> entities,
+    private static <T, D extends Resource> List<D> toResources(final Collection<T> data,
             final ResourceAssembler<T, D> assembler) {
-        List<D> resources = new ArrayList<>(entities.size());
-        for (T entity : entities) {
-            resources.add(assembler.toResource(entity));
+        List<D> resources = new ArrayList<>(data.size());
+        for (T element : data) {
+            resources.add(assembler.toResource(element));
         }
         return resources;
     }

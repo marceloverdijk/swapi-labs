@@ -69,15 +69,15 @@ public class JSONAPIDocumentHttpMessageConverter extends AbstractGenericHttpMess
     }
 
     @Override
-    protected void writeInternal(final JSONAPIDocument jsonapiDocument, final Type type, final HttpOutputMessage outputMessage)
+    protected void writeInternal(final JSONAPIDocument document, final Type type, final HttpOutputMessage outputMessage)
             throws IOException, HttpMessageNotWritableException {
         try {
-            Object resource = jsonapiDocument.get();
+            Object data = document.get();
             byte[] message;
-            if (resource != null && Iterable.class.isAssignableFrom(resource.getClass())) {
-                message = converter.writeDocumentCollection((JSONAPIDocument<? extends Iterable<?>>) jsonapiDocument);
+            if (data != null && Iterable.class.isAssignableFrom(data.getClass())) {
+                message = converter.writeDocumentCollection((JSONAPIDocument<? extends Iterable<?>>) document);
             } else {
-                message = converter.writeDocument(jsonapiDocument);
+                message = converter.writeDocument(document);
             }
             outputMessage.getBody().write(message);
         } catch (DocumentSerializationException e) {

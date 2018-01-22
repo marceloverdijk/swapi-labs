@@ -31,14 +31,14 @@ import java.util.List;
  */
 public abstract class BaseController {
 
-    public <T, D extends Resource> JSONAPIDocument<D> createDocument(final T entity,
+    public <T, D extends Resource> JSONAPIDocument<D> createDocument(final T data,
             final ResourceAssembler<T, D> assembler) {
-        return JSONAPIDocumentUtils.createDocument(entity, assembler);
+        return JSONAPIDocumentUtils.createDocument(data, assembler);
     }
 
-    public <T, D extends Resource> JSONAPIDocument<List<D>> createCollectionDocument(final List<T> entities,
+    public <T, D extends Resource> JSONAPIDocument<List<D>> createCollectionDocument(final List<T> data,
             final ResourceAssembler<T, D> assembler) {
-        return JSONAPIDocumentUtils.createCollectionDocument(entities, assembler);
+        return JSONAPIDocumentUtils.createCollectionDocument(data, assembler);
     }
 
     public <T, D extends Resource> JSONAPIDocument<List<D>> createPagedDocument(final Page<T> page,
