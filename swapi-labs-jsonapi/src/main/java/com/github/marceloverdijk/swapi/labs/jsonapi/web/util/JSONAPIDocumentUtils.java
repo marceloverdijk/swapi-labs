@@ -71,7 +71,7 @@ public class JSONAPIDocumentUtils {
         Map<String, Link> links = new HashMap<>();
         links.put(SELF, new Link(ServletUriComponentsBuilder.fromCurrentRequest().build().toString()));
         document.setLinks(new Links(links));
-        // TODO add next prev links
+        // TODO add next + prev links
         Map<String, Object> meta = new HashMap<>();
         meta.put(PAGE_INFO, new PageInfo(page));
         document.setMeta(meta);

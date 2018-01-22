@@ -23,10 +23,18 @@ package com.github.marceloverdijk.swapi.labs.jsonapi.web;
  */
 public class Paths {
 
+    public static final String PATH_FILM_RESOURCES = "/films";
+    public static final String PATH_FILM_RESOURCE_BY_ID = "/films/{film-id}";
     public static final String PATH_PERSON_RESOURCES = "/persons";
     public static final String PATH_PERSON_RESOURCE_BY_ID = "/persons/{person-id}";
     public static final String PATH_PLANET_RESOURCES = "/planets";
     public static final String PATH_PLANET_RESOURCE_BY_ID = "/planets/{planet-id}";
+    public static final String PATH_SPECIES_RESOURCES = "/species";
+    public static final String PATH_SPECIES_RESOURCE_BY_ID = "/species/{species-id}";
+    public static final String PATH_STARSHIP_RESOURCES = "/starships";
+    public static final String PATH_STARSHIP_RESOURCE_BY_ID = "/starships/{starship-id}";
+    public static final String PATH_VEHICLE_RESOURCES = "/vehicles";
+    public static final String PATH_VEHICLE_RESOURCE_BY_ID = "/vehicles/{vehicle-id}";
 
     private Paths() {
     }

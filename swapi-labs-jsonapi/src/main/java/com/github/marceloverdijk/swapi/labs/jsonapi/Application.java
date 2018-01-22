@@ -19,8 +19,12 @@ package com.github.marceloverdijk.swapi.labs.jsonapi;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jasminb.jsonapi.ResourceConverter;
 import com.github.jasminb.jsonapi.SerializationFeature;
+import com.github.marceloverdijk.swapi.labs.jsonapi.web.resource.FilmResource;
 import com.github.marceloverdijk.swapi.labs.jsonapi.web.resource.PersonResource;
 import com.github.marceloverdijk.swapi.labs.jsonapi.web.resource.PlanetResource;
+import com.github.marceloverdijk.swapi.labs.jsonapi.web.resource.SpeciesResource;
+import com.github.marceloverdijk.swapi.labs.jsonapi.web.resource.StarshipResource;
+import com.github.marceloverdijk.swapi.labs.jsonapi.web.resource.VehicleResource;
 import com.github.marceloverdijk.swapi.labs.model.BaseModel;
 import com.github.marceloverdijk.swapi.labs.repository.BaseRepository;
 import org.springframework.boot.SpringApplication;
@@ -47,8 +51,12 @@ public class Application {
     public ResourceConverter resourceConverter(final ObjectMapper mapper) {
         // Do classpath scanning? https://github.com/jasminb/jsonapi-converter/issues/131
         Class<?>[] classes = new Class[] {
+                FilmResource.class,
                 PersonResource.class,
-                PlanetResource.class
+                PlanetResource.class,
+                SpeciesResource.class,
+                StarshipResource.class,
+                VehicleResource.class
         };
         ResourceConverter converter = new ResourceConverter(mapper, classes);
         converter.enableSerializationOption(SerializationFeature.INCLUDE_RELATIONSHIP_ATTRIBUTES);
