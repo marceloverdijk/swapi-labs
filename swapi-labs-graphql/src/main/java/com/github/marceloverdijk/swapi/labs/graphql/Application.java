@@ -21,7 +21,13 @@ import com.github.marceloverdijk.swapi.labs.repository.BaseRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
+
+import javax.servlet.DispatcherType;
+import java.util.EnumSet;
 
 /**
  * The main application class.
@@ -35,5 +41,14 @@ public class Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
+    }
+
+    // TODO remove after introducing DTO object to return from GraphQL Query class (instead of JPA entities).
+    @Bean
+    public FilterRegistrationBean OpenEntityManagerInViewFilter() {
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setFilter(new OpenEntityManagerInViewFilter());
+        registration.setDispatcherTypes(EnumSet.allOf(DispatcherType.class));
+        return registration;
     }
 }
