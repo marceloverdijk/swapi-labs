@@ -47,7 +47,6 @@ public class SpeciesResource extends BaseResource {
     private PlanetResource homeworld;
 
     @RelationshipLinks("homeworld")
-    @JsonIgnore // TODO https://github.com/jasminb/jsonapi-converter/issues/165
     private Links homeworldLinks;
 
     private String language;
