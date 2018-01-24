@@ -23,6 +23,6 @@ package com.github.marceloverdijk.swapi.labs.jsonapi.web;
  */
 public class MetaFields {
 
-    public static final String REQUEST_ID = "request_id";
-    public static final String PAGE_INFO = "page_info";
+    public static final String REQUEST_ID = "request-id";
+    public static final String PAGE_INFO = "page-info";
 }

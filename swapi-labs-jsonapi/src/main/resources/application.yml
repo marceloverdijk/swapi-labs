@@ -11,7 +11,7 @@ spring:
         size-parameter: page.size
   jackson:
     date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
-    property-naming-strategy: CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES
+    property-naming-strategy: KEBAB_CASE
   jpa:
     hibernate.ddl-auto: none
     show-sql: true
