@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Objects;
 
-import static com.github.marceloverdijk.swapi.labs.jsonapi.web.MediaTypes.APPLICATION_VND_API_JSON_VALUE;
+import static com.github.marceloverdijk.swapi.labs.jsonapi.web.MediaTypes.API_JSON_VALUE;
 import static com.github.marceloverdijk.swapi.labs.jsonapi.web.Paths.PATH_PERSON_RESOURCES;
 import static com.github.marceloverdijk.swapi.labs.jsonapi.web.Paths.PATH_PERSON_RESOURCE_BY_ID;
 
@@ -57,7 +57,7 @@ public class PersonController extends BaseController {
         this.personResourceAssembler = Objects.requireNonNull(personResourceAssembler, "'personResourceAssembler' must not be null");
     }
 
-    @GetMapping(path = PATH_PERSON_RESOURCES, produces = APPLICATION_VND_API_JSON_VALUE)
+    @GetMapping(path = PATH_PERSON_RESOURCES, produces = API_JSON_VALUE)
     public JSONAPIDocument<List<PersonResource>> list(Pageable pageable) {
         LOGGER.info("list called");
         Page<Person> page = personRepository.findAll(
@@ -65,7 +65,7 @@ public class PersonController extends BaseController {
         return createPagedDocument(page, personResourceAssembler);
     }
 
-    @GetMapping(path = PATH_PERSON_RESOURCE_BY_ID, produces = APPLICATION_VND_API_JSON_VALUE)
+    @GetMapping(path = PATH_PERSON_RESOURCE_BY_ID, produces = API_JSON_VALUE)
     public JSONAPIDocument<PersonResource> getById(@PathVariable("person-id") Long personId) {
         LOGGER.info("get by id [{}] called", personId);
         Person person = personRepository.findById(personId)

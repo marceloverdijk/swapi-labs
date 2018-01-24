@@ -26,15 +26,12 @@ import org.springframework.http.MediaType;
 public class MediaTypes {
 
     /**
-     * A String equivalent of {@link #APPLICATION_VND_API_JSON}.
+     * A String equivalent of {@link #API_JSON}.
      */
-    public final static String APPLICATION_VND_API_JSON_VALUE = "application/vnd.api+json";
+    public static final String API_JSON_VALUE = "application/vnd.api+json";
 
     /**
      * Public constant media type for {@code application/vnd.api+json}.
      */
-    public final static MediaType APPLICATION_VND_API_JSON = MediaType.valueOf(APPLICATION_VND_API_JSON_VALUE);
-
-    private MediaTypes() {
-    }
+    public static final MediaType API_JSON = MediaType.valueOf(API_JSON_VALUE);
 }

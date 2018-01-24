@@ -11,6 +11,7 @@
 /bin
 /build
 /buildSrc/build
+/buildSrc/out
 /classes
 /lib
 /log

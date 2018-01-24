@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Objects;
 
-import static com.github.marceloverdijk.swapi.labs.jsonapi.web.MediaTypes.APPLICATION_VND_API_JSON_VALUE;
+import static com.github.marceloverdijk.swapi.labs.jsonapi.web.MediaTypes.API_JSON_VALUE;
 import static com.github.marceloverdijk.swapi.labs.jsonapi.web.Paths.PATH_STARSHIP_RESOURCES;
 import static com.github.marceloverdijk.swapi.labs.jsonapi.web.Paths.PATH_STARSHIP_RESOURCE_BY_ID;
 
@@ -57,7 +57,7 @@ public class StarshipController extends BaseController {
         this.starshipResourceAssembler = Objects.requireNonNull(starshipResourceAssembler, "'starshipResourceAssembler' must not be null");
     }
 
-    @GetMapping(path = PATH_STARSHIP_RESOURCES, produces = APPLICATION_VND_API_JSON_VALUE)
+    @GetMapping(path = PATH_STARSHIP_RESOURCES, produces = API_JSON_VALUE)
     public JSONAPIDocument<List<StarshipResource>> list(Pageable pageable) {
         LOGGER.info("list called");
         Page<Starship> page = starshipRepository.findAll(
@@ -65,7 +65,7 @@ public class StarshipController extends BaseController {
         return createPagedDocument(page, starshipResourceAssembler);
     }
 
-    @GetMapping(path = PATH_STARSHIP_RESOURCE_BY_ID, produces = APPLICATION_VND_API_JSON_VALUE)
+    @GetMapping(path = PATH_STARSHIP_RESOURCE_BY_ID, produces = API_JSON_VALUE)
     public JSONAPIDocument<StarshipResource> getById(@PathVariable("starship-id") Long starshipId) {
         LOGGER.info("get by id [{}] called", starshipId);
         Starship starship = starshipRepository.findById(starshipId)

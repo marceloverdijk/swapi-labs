@@ -35,7 +35,4 @@ public class Paths {
     public static final String PATH_STARSHIP_RESOURCE_BY_ID = "/starships/{starship-id}";
     public static final String PATH_VEHICLE_RESOURCES = "/vehicles";
     public static final String PATH_VEHICLE_RESOURCE_BY_ID = "/vehicles/{vehicle-id}";
-
-    private Paths() {
-    }
 }

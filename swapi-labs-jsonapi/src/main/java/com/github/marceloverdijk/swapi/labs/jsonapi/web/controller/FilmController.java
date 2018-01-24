@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Objects;
 
-import static com.github.marceloverdijk.swapi.labs.jsonapi.web.MediaTypes.APPLICATION_VND_API_JSON_VALUE;
+import static com.github.marceloverdijk.swapi.labs.jsonapi.web.MediaTypes.API_JSON_VALUE;
 import static com.github.marceloverdijk.swapi.labs.jsonapi.web.Paths.PATH_FILM_RESOURCES;
 import static com.github.marceloverdijk.swapi.labs.jsonapi.web.Paths.PATH_FILM_RESOURCE_BY_ID;
 
@@ -57,7 +57,7 @@ public class FilmController extends BaseController {
         this.filmResourceAssembler = Objects.requireNonNull(filmResourceAssembler, "'filmResourceAssembler' must not be null");
     }
 
-    @GetMapping(path = PATH_FILM_RESOURCES, produces = APPLICATION_VND_API_JSON_VALUE)
+    @GetMapping(path = PATH_FILM_RESOURCES, produces = API_JSON_VALUE)
     public JSONAPIDocument<List<FilmResource>> list(Pageable pageable) {
         LOGGER.info("list called");
         Page<Film> page = filmRepository.findAll(
@@ -65,7 +65,7 @@ public class FilmController extends BaseController {
         return createPagedDocument(page, filmResourceAssembler);
     }
 
-    @GetMapping(path = PATH_FILM_RESOURCE_BY_ID, produces = APPLICATION_VND_API_JSON_VALUE)
+    @GetMapping(path = PATH_FILM_RESOURCE_BY_ID, produces = API_JSON_VALUE)
     public JSONAPIDocument<FilmResource> getById(@PathVariable("film-id") Long filmId) {
         LOGGER.info("get by id [{}] called", filmId);
         Film film = filmRepository.findById(filmId)

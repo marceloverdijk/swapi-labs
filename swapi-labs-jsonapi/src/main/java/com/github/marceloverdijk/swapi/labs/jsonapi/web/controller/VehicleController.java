@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Objects;
 
-import static com.github.marceloverdijk.swapi.labs.jsonapi.web.MediaTypes.APPLICATION_VND_API_JSON_VALUE;
+import static com.github.marceloverdijk.swapi.labs.jsonapi.web.MediaTypes.API_JSON_VALUE;
 import static com.github.marceloverdijk.swapi.labs.jsonapi.web.Paths.PATH_VEHICLE_RESOURCES;
 import static com.github.marceloverdijk.swapi.labs.jsonapi.web.Paths.PATH_VEHICLE_RESOURCE_BY_ID;
 
@@ -57,7 +57,7 @@ public class VehicleController extends BaseController {
         this.vehicleResourceAssembler = Objects.requireNonNull(vehicleResourceAssembler, "'vehicleResourceAssembler' must not be null");
     }
 
-    @GetMapping(path = PATH_VEHICLE_RESOURCES, produces = APPLICATION_VND_API_JSON_VALUE)
+    @GetMapping(path = PATH_VEHICLE_RESOURCES, produces = API_JSON_VALUE)
     public JSONAPIDocument<List<VehicleResource>> list(Pageable pageable) {
         LOGGER.info("list called");
         Page<Vehicle> page = vehicleRepository.findAll(
@@ -65,7 +65,7 @@ public class VehicleController extends BaseController {
         return createPagedDocument(page, vehicleResourceAssembler);
     }
 
-    @GetMapping(path = PATH_VEHICLE_RESOURCE_BY_ID, produces = APPLICATION_VND_API_JSON_VALUE)
+    @GetMapping(path = PATH_VEHICLE_RESOURCE_BY_ID, produces = API_JSON_VALUE)
     public JSONAPIDocument<VehicleResource> getById(@PathVariable("vehicle-id") Long vehicleId) {
         LOGGER.info("get by id [{}] called", vehicleId);
         Vehicle vehicle = vehicleRepository.findById(vehicleId)

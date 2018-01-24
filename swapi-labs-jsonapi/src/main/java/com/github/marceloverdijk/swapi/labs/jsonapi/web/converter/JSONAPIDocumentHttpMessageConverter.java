@@ -33,7 +33,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.Objects;
 
-import static com.github.marceloverdijk.swapi.labs.jsonapi.web.MediaTypes.APPLICATION_VND_API_JSON;
+import static com.github.marceloverdijk.swapi.labs.jsonapi.web.MediaTypes.API_JSON;
 
 /**
  * A JSON API {@link HttpMessageConverter}
@@ -47,7 +47,7 @@ public class JSONAPIDocumentHttpMessageConverter extends AbstractGenericHttpMess
 
     @Autowired
     public JSONAPIDocumentHttpMessageConverter(final ResourceConverter converter) {
-        super(APPLICATION_VND_API_JSON);
+        super(API_JSON);
         this.converter = Objects.requireNonNull(converter, "'converter' must not be null");
     }
 
