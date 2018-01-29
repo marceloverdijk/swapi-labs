@@ -1,12 +1,9 @@
 buildscript {
     ext {
-        appengineVersion                 = "1.9.60"
-        appengineGradlePluginVersion     = "1.3.4"
         commonsLang3Version              = "3.7"
         graphqlJavaToolsVersion          = "4.3.0"
         graphqlSpringBootStarterVersion  = "4.0.0.M1"
         graphiqlSpringBootStarterVersion = "3.10.0"
-        grettyVersion                    = "2.0.0"
         jsonapiConverterVersion          = "0.8"
         querydslPluginVersion            = "1.0.9"
         servletApiVersion                = "3.1.0"
@@ -19,8 +16,6 @@ buildscript {
         maven { url "https://repo.spring.io/milestone" }
     }
     dependencies {
-        classpath("com.google.cloud.tools:appengine-gradle-plugin:${appengineGradlePluginVersion}")
-        classpath("org.akhikhl.gretty:gretty:${grettyVersion}")
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath("gradle.plugin.com.ewerk.gradle.plugins:querydsl-plugin:${querydslPluginVersion}")
     }
@@ -89,20 +84,11 @@ project("swapi-labs-graphql") {
 
     description = "SWAPI Labs GraphQL"
 
-    apply plugin: "war"
-    apply plugin: "com.google.cloud.tools.appengine"
-    apply plugin: "org.akhikhl.gretty"
     apply plugin: "org.springframework.boot"
-
-    configurations {
-        compile.exclude(module: "jul-to-slf4j")
-        compile.exclude(module: "spring-boot-starter-tomcat")
-    }
 
     dependencies {
         compile project(":swapi-labs-commons-jpa")
         compile project(":swapi-labs-data")
-        compile("com.google.appengine:appengine-api-1.0-sdk:${appengineVersion}")
         compile("com.graphql-java:graphql-java-tools:${graphqlJavaToolsVersion}")
         compile("com.graphql-java:graphql-spring-boot-starter:${graphqlSpringBootStarterVersion}")
         compile("com.graphql-java:graphiql-spring-boot-starter:${graphiqlSpringBootStarterVersion}")
@@ -111,12 +97,8 @@ project("swapi-labs-graphql") {
         compile("org.springframework.boot:spring-boot-starter-aop")
         compile("org.springframework.boot:spring-boot-starter-data-jpa")
         compile("org.springframework.boot:spring-boot-starter-web")
-        providedCompile("javax.servlet:javax.servlet-api:${servletApiVersion}")
         runtime("com.h2database:h2")
         runtime("org.springframework.boot:spring-boot-devtools")
-        testCompile("com.google.appengine:appengine-testing:${appengineVersion}")
-        testCompile("com.google.appengine:appengine-api-stubs:${appengineVersion}")
-        testCompile("com.google.appengine:appengine-tools-sdk:${appengineVersion}")
         testCompile("org.springframework.boot:spring-boot-starter-test")
     }
 
@@ -129,37 +111,20 @@ project("swapi-labs-jsonapi") {
 
     description = "SWAPI Labs JSON API"
 
-    apply plugin: "war"
-    apply plugin: "com.google.cloud.tools.appengine"
-    // apply plugin: "org.akhikhl.gretty"
     apply plugin: "org.springframework.boot"
-
-    configurations {
-        compile.exclude(module: "jul-to-slf4j")
-        compile.exclude(module: "spring-boot-starter-tomcat")
-    }
 
     dependencies {
         compile project(":swapi-labs-commons-jpa")
         compile project(":swapi-labs-data")
-        compile("com.google.appengine:appengine-api-1.0-sdk:${appengineVersion}")
         compile("com.github.jasminb:jsonapi-converter:${jsonapiConverterVersion}")
         compile("com.querydsl:querydsl-jpa")
         compile("org.springframework.boot:spring-boot-starter-actuator")
         compile("org.springframework.boot:spring-boot-starter-aop")
         compile("org.springframework.boot:spring-boot-starter-data-jpa")
         compile("org.springframework.boot:spring-boot-starter-web")
-        providedCompile("javax.servlet:javax.servlet-api:${servletApiVersion}")
         runtime("com.h2database:h2")
         runtime("org.springframework.boot:spring-boot-devtools")
-        testCompile("com.google.appengine:appengine-testing:${appengineVersion}")
-        testCompile("com.google.appengine:appengine-api-stubs:${appengineVersion}")
-        testCompile("com.google.appengine:appengine-tools-sdk:${appengineVersion}")
         testCompile("org.springframework.boot:spring-boot-starter-test")
-    }
-
-    appengine {
-        // TODO
     }
 
     bootRun {
