@@ -4,7 +4,8 @@ def String[] modules = [
         "swapi-labs-commons-jpa",
         "swapi-labs-data",
         "swapi-labs-graphql",
-        "swapi-labs-jsonapi"
+        "swapi-labs-jsonapi",
+        "swapi-labs-spring-hateoas"
 ]
 
 include modules

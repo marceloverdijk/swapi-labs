@@ -2,9 +2,9 @@ buildscript {
     ext {
         commonsLang3Version              = "3.7"
         graphqlJavaToolsVersion          = "4.3.0"
-        graphqlSpringBootStarterVersion  = "4.0.0.M1"
-        graphiqlSpringBootStarterVersion = "3.10.0"
-        jsonapiConverterVersion          = "0.8"
+        graphqlSpringBootStarterVersion  = "4.0.0"
+        graphiqlSpringBootStarterVersion = "4.0.0"
+        jsonapiConverterVersion          = "0.8.1"
         querydslPluginVersion            = "1.0.9"
         servletApiVersion                = "3.1.0"
         springBootVersion                = "2.0.1.RELEASE"
@@ -121,6 +121,31 @@ project("swapi-labs-jsonapi") {
         compile("org.springframework.boot:spring-boot-starter-actuator")
         compile("org.springframework.boot:spring-boot-starter-aop")
         compile("org.springframework.boot:spring-boot-starter-data-jpa")
+        compile("org.springframework.boot:spring-boot-starter-web")
+        runtime("com.h2database:h2")
+        runtime("org.springframework.boot:spring-boot-devtools")
+        testCompile("org.springframework.boot:spring-boot-starter-test")
+    }
+
+    bootRun {
+        systemProperties = System.properties
+    }
+}
+
+project("swapi-labs-spring-hateoas") {
+
+    description = "SWAPI Labs Spring HATEOAS"
+
+    apply plugin: "org.springframework.boot"
+
+    dependencies {
+        compile project(":swapi-labs-commons-jpa")
+        compile project(":swapi-labs-data")
+        compile("com.querydsl:querydsl-jpa")
+        compile("org.springframework.boot:spring-boot-starter-actuator")
+        compile("org.springframework.boot:spring-boot-starter-aop")
+        compile("org.springframework.boot:spring-boot-starter-data-jpa")
+        compile("org.springframework.boot:spring-boot-starter-hateoas")
         compile("org.springframework.boot:spring-boot-starter-web")
         runtime("com.h2database:h2")
         runtime("org.springframework.boot:spring-boot-devtools")
