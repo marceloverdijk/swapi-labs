@@ -7,7 +7,7 @@ buildscript {
         jsonapiConverterVersion          = "0.8"
         querydslPluginVersion            = "1.0.9"
         servletApiVersion                = "3.1.0"
-        springBootVersion                = "2.0.0.BUILD-SNAPSHOT"
+        springBootVersion                = "2.0.1.RELEASE"
     }
     repositories {
         mavenCentral()
