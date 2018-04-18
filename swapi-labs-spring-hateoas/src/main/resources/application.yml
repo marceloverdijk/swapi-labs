@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    name: swapidb
+  data:
+    web:
+      pageable:
+        default-page-size: 10
+        max-page-size: 100
+        one-indexed-parameters: true
+        page-parameter: page[number]
+        size-parameter: page[size]
+  jackson:
+    date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+    property-naming-strategy: SNAKE_CASE
+  jpa:
+    hibernate.ddl-auto: none
+    show-sql: true
+logging:
+  level:
+    root: INFO
+    com.github.marceloverdijk.swapi.labs: DEBUG
+management:
+  endpoints:
+    jmx:
+      enabled: false
+    web:
+      enabled: true
+      expose: "*"
